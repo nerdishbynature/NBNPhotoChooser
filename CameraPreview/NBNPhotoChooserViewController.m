@@ -83,7 +83,6 @@
     NSString *CellIdentifier = [NBNImageCaptureCell reuserIdentifier];
     NBNImageCaptureCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
                                                                         forIndexPath:indexPath];
-    [cell startCapturing];
     return cell;
 }
 
@@ -91,15 +90,6 @@
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return [NBNAssetCell size];
-}
-
-- (void)collectionView:(UICollectionView *)collectionView
-  didEndDisplayingCell:(UICollectionViewCell *)cell
-    forItemAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell isKindOfClass:[NBNImageCaptureCell class]]) {
-        NBNImageCaptureCell *imageCell = (NBNImageCaptureCell *)cell;
-        [imageCell endCapturing];
-    }
 }
 
 @end

@@ -4,8 +4,7 @@
 
 @interface NBNImageCaptureCell ()
 
-@property (nonatomic, strong) NBNImageCaptureManager *captureManager;
-@property (nonatomic, strong) NSOperationQueue *startEndQueue;
+@property (nonatomic) UIImagePickerController *imagePickerController;
 
 @end
 
@@ -15,54 +14,18 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setupCaptureManager];
-        [self setupQueue];
+        [self setupImagePicker];
     }
     return self;
 }
 
-- (void)startCapturing {
-    if (![self.captureManager.captureSession isRunning]) {
-        NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
-            NSLog(@"starting");
-            [self.captureManager.captureSession startRunning];
-        }];
-        [self.startEndQueue addOperation:op];
-    }
-}
+- (void)setupImagePicker {
+    self.imagePickerController = [[UIImagePickerController alloc] init];
+    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.imagePickerController.showsCameraControls = NO;
+    [self.imagePickerController.view setFrame:CGRectMake(0, 0, 95, 95)];
+    [self.contentView addSubview:self.imagePickerController.view];
 
-- (void)endCapturing {
-    if ([self.captureManager.captureSession isRunning]) {
-        NSBlockOperation *op = [NSBlockOperation blockOperationWithBlock:^{
-            NSLog(@"ending");
-             [self.captureManager.captureSession stopRunning];
-        }];
-        [self.startEndQueue addOperation:op];
-    }
-}
-
-- (void)setupCaptureManager {
-    if (!self.captureManager) {
-        self.captureManager = [[NBNImageCaptureManager alloc] init];
-
-        [[self captureManager] addVideoInput];
-
-        [[self captureManager] addVideoPreviewLayer];
-        CGRect layerRect = self.contentView.layer.bounds;
-        [self.captureManager.previewLayer setBounds:layerRect];
-        [self.captureManager.previewLayer setPosition:CGPointMake(CGRectGetMidX(layerRect),
-                                                                  CGRectGetMidY(layerRect))];
-
-        if (!self.captureManager.previewLayer.superlayer) {
-        	[self.contentView.layer addSublayer:self.captureManager.previewLayer];
-        }
-    }
-}
-
-- (void)setupQueue {
-    _startEndQueue = [[NSOperationQueue alloc] init];
-    _startEndQueue.name = @"startEndQueue";
-    _startEndQueue.maxConcurrentOperationCount = 2;
 }
 
 + (CGSize)size {
