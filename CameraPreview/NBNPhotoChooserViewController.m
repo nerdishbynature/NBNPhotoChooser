@@ -44,7 +44,7 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - UICollectionViewDelegate
+#pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
@@ -59,10 +59,12 @@
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     NSString *CellIdentifier = [NBNAssetCell reuserIdentifier];
     NBNAssetCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
-                                                                           forIndexPath:indexPath];
-    if (self.images.count) {
+                                                                   forIndexPath:indexPath];
+    if (indexPath.row < self.images.count) {
         UIImage *asset = [self.images objectAtIndex:indexPath.row];
         [cell configureWithAsset:asset];
+    } else {
+        // Camera Preview
     }
 
     return cell;
