@@ -33,12 +33,12 @@ NS_ENUM(NSInteger, NBNAssetsGroupType) {
     [al enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
         ALAssetsGroupType type = (ALAssetsGroupType)[group valueForProperty:ALAssetsGroupPropertyType];
 
-        if ((int)type == NBNAssetsGroupTypeCameraRoll) { // Camera Roll
+        if ((int)type == NBNAssetsGroupTypeCameraRoll) {
             [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *secondStop) {
                 if (result) {
                     UIImage *image = [UIImage imageWithCGImage:result.thumbnail
                                                          scale:1.0
-                                                   orientation:(UIImageOrientation)result.defaultRepresentation.orientation];
+                                                   orientation:0];
                     [self.mutableArray addObject:image];
                 }
                 if (stop || secondStop) {
