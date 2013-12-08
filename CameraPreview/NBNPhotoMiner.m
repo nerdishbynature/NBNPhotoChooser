@@ -49,7 +49,7 @@ NS_ENUM(NSInteger, NBNAssetsGroupType) {
         }
 
     } failureBlock:^(NSError *error) {
-        NSLog(@"Nicht erlaubt");
+        NSLog(@"access not permitted");
     }];
 }
 
