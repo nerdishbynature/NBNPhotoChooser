@@ -1,6 +1,7 @@
 #import "NBNPhotoChooserViewController.h"
 #import "NBNAssetCell.h"
 #import "NBNPhotoMiner.h"
+#import "NBNImageCaptureCell.h"
 
 @interface NBNPhotoChooserViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -38,6 +39,7 @@
 
 - (void)registerCellTypes {
     [NBNAssetCell registerIn:self.collectionView];
+    [NBNImageCaptureCell registerIn:self.collectionView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,21 +54,36 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-    return self.images.count;
+    return self.images.count + 1;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    if (indexPath.row < self.images.count) {
+        return [self assetCellForCollectionView:collectionView atIndex:indexPath];
+    } else {
+        return [self imageCaptureCellForCollectionView:collectionView atIndex:indexPath];
+    }
+}
+
+- (UICollectionViewCell *)assetCellForCollectionView:(UICollectionView *)collectionView
+                                             atIndex:(NSIndexPath *)indexPath {
     NSString *CellIdentifier = [NBNAssetCell reuserIdentifier];
     NBNAssetCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
                                                                    forIndexPath:indexPath];
-    if (indexPath.row < self.images.count) {
-        UIImage *asset = [self.images objectAtIndex:indexPath.row];
-        [cell configureWithAsset:asset];
-    } else {
-        // Camera Preview
-    }
+    UIImage *asset = [self.images objectAtIndex:indexPath.row];
+    [cell configureWithAsset:asset];
 
+    return cell;
+}
+
+- (UICollectionViewCell *)imageCaptureCellForCollectionView:(UICollectionView *)collectionView
+                                                    atIndex:(NSIndexPath *)indexPath {
+    NSString *CellIdentifier = [NBNImageCaptureCell reuserIdentifier];
+    NBNImageCaptureCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
+                                                                        forIndexPath:indexPath];
+    [cell startCapturing];
     return cell;
 }
 
@@ -74,6 +91,15 @@
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return [NBNAssetCell size];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView
+  didEndDisplayingCell:(UICollectionViewCell *)cell
+    forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell isKindOfClass:[NBNImageCaptureCell class]]) {
+        NBNImageCaptureCell *imageCell = (NBNImageCaptureCell *)cell;
+        [imageCell endCapturing];
+    }
 }
 
 @end

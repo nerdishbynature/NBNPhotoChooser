@@ -23,6 +23,8 @@
 		F0B1DE24185483E200908909 /* NBNCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE23185483E200908909 /* NBNCollectionViewCell.m */; };
 		F0B1DE271854854D00908909 /* NBNPhotoMiner.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE261854854D00908909 /* NBNPhotoMiner.m */; };
 		F0B1DE2A185490BF00908909 /* NBNAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE29185490BF00908909 /* NBNAssetCell.m */; };
+		F0B1DE2D18549BC500908909 /* NBNImageCaptureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE2C18549BC500908909 /* NBNImageCaptureCell.m */; };
+		F0B1DE3018549D6B00908909 /* NBNImageCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE2F18549D6B00908909 /* NBNImageCaptureManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,10 @@
 		F0B1DE261854854D00908909 /* NBNPhotoMiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNPhotoMiner.m; sourceTree = "<group>"; };
 		F0B1DE28185490BF00908909 /* NBNAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNAssetCell.h; sourceTree = "<group>"; };
 		F0B1DE29185490BF00908909 /* NBNAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNAssetCell.m; sourceTree = "<group>"; };
+		F0B1DE2B18549BC500908909 /* NBNImageCaptureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNImageCaptureCell.h; sourceTree = "<group>"; };
+		F0B1DE2C18549BC500908909 /* NBNImageCaptureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNImageCaptureCell.m; sourceTree = "<group>"; };
+		F0B1DE2E18549D6B00908909 /* NBNImageCaptureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNImageCaptureManager.h; sourceTree = "<group>"; };
+		F0B1DE2F18549D6B00908909 /* NBNImageCaptureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNImageCaptureManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +129,10 @@
 				F0B1DE001854829900908909 /* NBNAppDelegate.m */,
 				F0B1DE1F185482F200908909 /* NBNPhotoChooserViewController.h */,
 				F0B1DE20185482F200908909 /* NBNPhotoChooserViewController.m */,
+				F0B1DE2B18549BC500908909 /* NBNImageCaptureCell.h */,
+				F0B1DE2C18549BC500908909 /* NBNImageCaptureCell.m */,
+				F0B1DE2E18549D6B00908909 /* NBNImageCaptureManager.h */,
+				F0B1DE2F18549D6B00908909 /* NBNImageCaptureManager.m */,
 				F0B1DE28185490BF00908909 /* NBNAssetCell.h */,
 				F0B1DE29185490BF00908909 /* NBNAssetCell.m */,
 				F0B1DE22185483E200908909 /* NBNCollectionViewCell.h */,
@@ -266,6 +276,8 @@
 				F0B1DDFD1854829900908909 /* main.m in Sources */,
 				F0B1DE21185482F200908909 /* NBNPhotoChooserViewController.m in Sources */,
 				F0B1DE271854854D00908909 /* NBNPhotoMiner.m in Sources */,
+				F0B1DE3018549D6B00908909 /* NBNImageCaptureManager.m in Sources */,
+				F0B1DE2D18549BC500908909 /* NBNImageCaptureCell.m in Sources */,
 				F0B1DE2A185490BF00908909 /* NBNAssetCell.m in Sources */,
 				F0B1DE011854829900908909 /* NBNAppDelegate.m in Sources */,
 				F0B1DE24185483E200908909 /* NBNCollectionViewCell.m in Sources */,
