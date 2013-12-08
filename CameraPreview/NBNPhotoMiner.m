@@ -36,10 +36,12 @@ NS_ENUM(NSInteger, NBNAssetsGroupType) {
         if ((int)type == NBNAssetsGroupTypeCameraRoll) {
             [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *secondStop) {
                 if (result) {
-                    UIImage *image = [UIImage imageWithCGImage:result.thumbnail
-                                                         scale:1.0
-                                                   orientation:0];
-                    [self.mutableArray addObject:image];
+                    if ([[result valueForProperty:@"ALAssetPropertyType"] isEqualToString:@"ALAssetTypePhoto"]) {
+                        UIImage *image = [UIImage imageWithCGImage:result.thumbnail
+                                                             scale:1.0
+                                                       orientation:0];
+                        [self.mutableArray addObject:image];
+                    }
                 }
                 if (stop || secondStop) {
                     self.imageArray = [NSArray arrayWithArray:self.mutableArray];
