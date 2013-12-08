@@ -19,6 +19,10 @@
 		F0B1DE0C1854829900908909 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B1DDF41854829900908909 /* UIKit.framework */; };
 		F0B1DE141854829900908909 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F0B1DE121854829900908909 /* InfoPlist.strings */; };
 		F0B1DE161854829900908909 /* CameraPreviewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE151854829900908909 /* CameraPreviewTests.m */; };
+		F0B1DE21185482F200908909 /* NBNPhotoChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE20185482F200908909 /* NBNPhotoChooserViewController.m */; };
+		F0B1DE24185483E200908909 /* NBNCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE23185483E200908909 /* NBNCollectionViewCell.m */; };
+		F0B1DE271854854D00908909 /* NBNPhotoMiner.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE261854854D00908909 /* NBNPhotoMiner.m */; };
+		F0B1DE2A185490BF00908909 /* NBNAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE29185490BF00908909 /* NBNAssetCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,14 @@
 		F0B1DE111854829900908909 /* CameraPreviewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CameraPreviewTests-Info.plist"; sourceTree = "<group>"; };
 		F0B1DE131854829900908909 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F0B1DE151854829900908909 /* CameraPreviewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPreviewTests.m; sourceTree = "<group>"; };
+		F0B1DE1F185482F200908909 /* NBNPhotoChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNPhotoChooserViewController.h; sourceTree = "<group>"; };
+		F0B1DE20185482F200908909 /* NBNPhotoChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNPhotoChooserViewController.m; sourceTree = "<group>"; };
+		F0B1DE22185483E200908909 /* NBNCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNCollectionViewCell.h; sourceTree = "<group>"; };
+		F0B1DE23185483E200908909 /* NBNCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNCollectionViewCell.m; sourceTree = "<group>"; };
+		F0B1DE251854854D00908909 /* NBNPhotoMiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNPhotoMiner.h; sourceTree = "<group>"; };
+		F0B1DE261854854D00908909 /* NBNPhotoMiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNPhotoMiner.m; sourceTree = "<group>"; };
+		F0B1DE28185490BF00908909 /* NBNAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNAssetCell.h; sourceTree = "<group>"; };
+		F0B1DE29185490BF00908909 /* NBNAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNAssetCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +121,14 @@
 			children = (
 				F0B1DDFF1854829900908909 /* NBNAppDelegate.h */,
 				F0B1DE001854829900908909 /* NBNAppDelegate.m */,
+				F0B1DE1F185482F200908909 /* NBNPhotoChooserViewController.h */,
+				F0B1DE20185482F200908909 /* NBNPhotoChooserViewController.m */,
+				F0B1DE28185490BF00908909 /* NBNAssetCell.h */,
+				F0B1DE29185490BF00908909 /* NBNAssetCell.m */,
+				F0B1DE22185483E200908909 /* NBNCollectionViewCell.h */,
+				F0B1DE23185483E200908909 /* NBNCollectionViewCell.m */,
+				F0B1DE251854854D00908909 /* NBNPhotoMiner.h */,
+				F0B1DE261854854D00908909 /* NBNPhotoMiner.m */,
 				F0B1DE021854829900908909 /* Images.xcassets */,
 				F0B1DDF71854829900908909 /* Supporting Files */,
 			);
@@ -192,6 +212,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "nerdish by nature";
 				TargetAttributes = {
+					F0B1DDEC1854829900908909 = {
+						DevelopmentTeam = M3F8W7J23K;
+					};
 					F0B1DE071854829900908909 = {
 						TestTargetID = F0B1DDEC1854829900908909;
 					};
@@ -241,7 +264,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0B1DDFD1854829900908909 /* main.m in Sources */,
+				F0B1DE21185482F200908909 /* NBNPhotoChooserViewController.m in Sources */,
+				F0B1DE271854854D00908909 /* NBNPhotoMiner.m in Sources */,
+				F0B1DE2A185490BF00908909 /* NBNAssetCell.m in Sources */,
 				F0B1DE011854829900908909 /* NBNAppDelegate.m in Sources */,
+				F0B1DE24185483E200908909 /* NBNCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,10 +387,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CameraPreview/CameraPreview-Prefix.pch";
 				INFOPLIST_FILE = "CameraPreview/CameraPreview-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -373,10 +403,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CameraPreview/CameraPreview-Prefix.pch";
 				INFOPLIST_FILE = "CameraPreview/CameraPreview-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
