@@ -25,6 +25,7 @@
 		F0B1DE2A185490BF00908909 /* NBNAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE29185490BF00908909 /* NBNAssetCell.m */; };
 		F0B1DE2D18549BC500908909 /* NBNImageCaptureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE2C18549BC500908909 /* NBNImageCaptureCell.m */; };
 		F0B1DE3018549D6B00908909 /* NBNImageCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE2F18549D6B00908909 /* NBNImageCaptureManager.m */; };
+		F0F991DF1854B4BF00D339C5 /* NBNPhotoChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = F0F991DE1854B4BF00D339C5 /* NBNPhotoChooser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		F0B1DE2C18549BC500908909 /* NBNImageCaptureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNImageCaptureCell.m; sourceTree = "<group>"; };
 		F0B1DE2E18549D6B00908909 /* NBNImageCaptureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNImageCaptureManager.h; sourceTree = "<group>"; };
 		F0B1DE2F18549D6B00908909 /* NBNImageCaptureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNImageCaptureManager.m; sourceTree = "<group>"; };
+		F0F991DD1854B4BF00D339C5 /* NBNPhotoChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNPhotoChooser.h; sourceTree = "<group>"; };
+		F0F991DE1854B4BF00D339C5 /* NBNPhotoChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNPhotoChooser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 			children = (
 				F0B1DDFF1854829900908909 /* NBNAppDelegate.h */,
 				F0B1DE001854829900908909 /* NBNAppDelegate.m */,
+				F0F991DD1854B4BF00D339C5 /* NBNPhotoChooser.h */,
+				F0F991DE1854B4BF00D339C5 /* NBNPhotoChooser.m */,
 				F0B1DE1F185482F200908909 /* NBNPhotoChooserViewController.h */,
 				F0B1DE20185482F200908909 /* NBNPhotoChooserViewController.m */,
 				F0B1DE2B18549BC500908909 /* NBNImageCaptureCell.h */,
@@ -279,6 +284,7 @@
 				F0B1DE3018549D6B00908909 /* NBNImageCaptureManager.m in Sources */,
 				F0B1DE2D18549BC500908909 /* NBNImageCaptureCell.m in Sources */,
 				F0B1DE2A185490BF00908909 /* NBNAssetCell.m in Sources */,
+				F0F991DF1854B4BF00D339C5 /* NBNPhotoChooser.m in Sources */,
 				F0B1DE011854829900908909 /* NBNAppDelegate.m in Sources */,
 				F0B1DE24185483E200908909 /* NBNCollectionViewCell.m in Sources */,
 			);
@@ -487,6 +493,7 @@
 				F0B1DE1B1854829900908909 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F0B1DE1C1854829900908909 /* Build configuration list for PBXNativeTarget "CameraPreviewTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +502,7 @@
 				F0B1DE1E1854829900908909 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,4 +1,5 @@
 #import "NBNAppDelegate.h"
+#import "NBNPhotoChooser.h"
 
 @implementation NBNAppDelegate
 
@@ -7,7 +8,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
 
-    self.photoChooser = [[NBNPhotoChooserViewController alloc] init];
+    self.photoChooser = [[NBNPhotoChooser alloc] init];
     self.window.rootViewController = self.photoChooser;
 
     [self.window makeKeyAndVisible];

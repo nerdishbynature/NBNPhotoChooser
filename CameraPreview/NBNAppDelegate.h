@@ -1,9 +1,9 @@
 #import <UIKit/UIKit.h>
-#import "NBNPhotoChooserViewController.h"
+#import "NBNPhotoChooser.h"
 
 @interface NBNAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic) UIWindow *window;
-@property (nonatomic) NBNPhotoChooserViewController *photoChooser;
+@property (nonatomic) NBNPhotoChooser *photoChooser;
 
 @end
