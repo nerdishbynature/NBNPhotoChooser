@@ -127,7 +127,12 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 - (void)didChooseImagePicker {
     self.captureCell.imagePickerController.delegate = self;
     for (UIViewController *controller in self.captureCell.imagePickerController.viewControllers) {
-        [controller performSelector:@selector(_takePicture) withObject:nil];
+        @try {
+            [controller performSelector:@selector(_takePicture) withObject:nil];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@", exception);
+        }
     }
 }
 
