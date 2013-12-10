@@ -1,6 +1,10 @@
 #import "NBNAppDelegate.h"
 #import "NBNPhotoChooser.h"
 
+@interface NBNAppDelegate () <NBNPhotoChooserDelegate>
+
+@end
+
 @implementation NBNAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -9,6 +13,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
 
     self.photoChooser = [[NBNPhotoChooser alloc] init];
+    self.photoChooser.photoChooserDelegate = self;
     self.window.rootViewController = self.photoChooser;
 
     [self.window makeKeyAndVisible];
@@ -28,6 +33,12 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+}
+
+#pragma mark - NBNPhotoChooserDelegate
+
+- (void)photoChooser:(NBNPhotoChooser *)photoChooser didChooseImage:(UIImage *)image {
+    NSLog(@"%@", image);
 }
 
 @end

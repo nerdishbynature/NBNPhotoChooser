@@ -1,7 +1,7 @@
 #import "NBNPhotoChooser.h"
 #import "NBNPhotoChooserViewController.h"
 
-@interface NBNPhotoChooser ()
+@interface NBNPhotoChooser () <NBNPhotoChooserViewControllerDelegate>
 
 @end
 
@@ -18,8 +18,16 @@
 }
 
 - (void)setupPhotoChooserViewController {
-    NBNPhotoChooserViewController *vc = [[NBNPhotoChooserViewController alloc] init];
+    NBNPhotoChooserViewController *vc = [[NBNPhotoChooserViewController alloc] initWithDelegate:self];
     self.viewControllers = @[vc];
+}
+
+- (void)didChooseImage:(UIImage *)image {
+    if ([self.photoChooserDelegate respondsToSelector:@selector(photoChooser:didChooseImage:)]) {
+        [self.photoChooserDelegate photoChooser:self didChooseImage:image];
+    } else {
+        NSAssert(NO, @"Delegate photoChooser:didChooseImage: has to be implemented");
+    }
 }
 
 @end
