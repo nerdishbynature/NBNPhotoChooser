@@ -24,7 +24,6 @@
     self.imagePickerController.showsCameraControls = NO;
     [self.imagePickerController.view setFrame:CGRectMake(0, 0, 95, 95)];
     [self.contentView addSubview:self.imagePickerController.view];
-
 }
 
 + (CGSize)size {
