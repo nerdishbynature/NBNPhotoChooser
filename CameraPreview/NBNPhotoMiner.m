@@ -55,5 +55,4 @@ NS_ENUM(NSInteger, NBNAssetsGroupType) {
     }];
 }
 
-
 @end
