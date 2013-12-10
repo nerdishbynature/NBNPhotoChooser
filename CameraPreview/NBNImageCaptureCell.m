@@ -1,5 +1,4 @@
 #import "NBNImageCaptureCell.h"
-#import "NBNImageCaptureManager.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface NBNImageCaptureCell ()
