@@ -3,14 +3,25 @@
 #import "NBNPhotoMiner.h"
 #import "NBNImageCaptureCell.h"
 
-@interface NBNPhotoChooserViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface NBNPhotoChooserViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic) UICollectionView *collectionView;
 @property (nonatomic) NSArray *images;
+@property (nonatomic) id<NBNPhotoChooserViewControllerDelegate> delegate;
 
 @end
 
 @implementation NBNPhotoChooserViewController
+
+- (id)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate {
+    self = [super init];
+
+    if (self) {
+        _delegate = delegate;
+    }
+
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -90,6 +101,41 @@
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return [NBNAssetCell size];
+}
+
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView
+didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < self.images.count) {
+        [self didChooseImage:self.images[indexPath.row]];
+    } else {
+        [self didChooseImagePicker];
+    }
+}
+
+- (void)didChooseImage:(UIImage *)image {
+    if ([self.delegate respondsToSelector:@selector(didChooseImage:)]) {
+        [self.delegate didChooseImage:image];
+    } else {
+         NSAssert(NO, @"Delegate didChooseImage: has to be implemented");
+    }
+}
+
+- (void)didChooseImagePicker {
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePickerController.showsCameraControls = YES;
+    imagePickerController.allowsEditing = YES;
+    imagePickerController.modalPresentationStyle = UIModalPresentationFullScreen;
+    imagePickerController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    [self didChooseImage:image];
 }
 
 @end
