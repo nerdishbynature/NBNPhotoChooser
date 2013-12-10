@@ -2,6 +2,8 @@
 
 @interface NBNImageCaptureCell : NBNCollectionViewCell
 
+@property (nonatomic) UIImagePickerController *imagePickerController;
+
 + (CGSize)size;
 
 @end

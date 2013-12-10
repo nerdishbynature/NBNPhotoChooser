@@ -8,6 +8,7 @@
 @property (nonatomic) UICollectionView *collectionView;
 @property (nonatomic) NSArray *images;
 @property (nonatomic) id<NBNPhotoChooserViewControllerDelegate> delegate;
+@property (nonatomic) NBNImageCaptureCell *captureCell;
 
 @end
 
@@ -94,6 +95,7 @@
     NSString *CellIdentifier = [NBNImageCaptureCell reuserIdentifier];
     NBNImageCaptureCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
                                                                         forIndexPath:indexPath];
+    self.captureCell = cell;
     return cell;
 }
 
@@ -123,18 +125,17 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)didChooseImagePicker {
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePickerController.showsCameraControls = YES;
-    imagePickerController.allowsEditing = YES;
-    imagePickerController.modalPresentationStyle = UIModalPresentationFullScreen;
-    imagePickerController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:imagePickerController animated:YES completion:nil];
+    self.captureCell.imagePickerController.delegate = self;
+    for (UIViewController *controller in self.captureCell.imagePickerController.viewControllers) {
+        [controller performSelector:@selector(_takePicture) withObject:nil];
+    }
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:nil];
+
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self didChooseImage:image];
 }
 
