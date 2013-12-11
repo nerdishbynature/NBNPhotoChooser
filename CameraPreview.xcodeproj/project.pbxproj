@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F0495CA518589ED10032F2E5 /* NBNImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0495CA418589ED10032F2E5 /* NBNImageViewController.m */; };
+		F0495CB118589EDE0032F2E5 /* NBNAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0495CA818589EDE0032F2E5 /* NBNAssetCell.m */; };
+		F0495CB218589EDE0032F2E5 /* NBNCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0495CAA18589EDE0032F2E5 /* NBNCollectionViewCell.m */; };
+		F0495CB318589EDE0032F2E5 /* NBNImageCaptureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0495CAC18589EDE0032F2E5 /* NBNImageCaptureCell.m */; };
+		F0495CB418589EDE0032F2E5 /* NBNPhotoChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0495CAE18589EDE0032F2E5 /* NBNPhotoChooserViewController.m */; };
+		F0495CB518589EDE0032F2E5 /* NBNPhotoMiner.m in Sources */ = {isa = PBXBuildFile; fileRef = F0495CB018589EDE0032F2E5 /* NBNPhotoMiner.m */; };
 		F0B1DDF11854829900908909 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B1DDF01854829900908909 /* Foundation.framework */; };
 		F0B1DDF31854829900908909 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B1DDF21854829900908909 /* CoreGraphics.framework */; };
 		F0B1DDF51854829900908909 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B1DDF41854829900908909 /* UIKit.framework */; };
@@ -19,12 +25,6 @@
 		F0B1DE0C1854829900908909 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0B1DDF41854829900908909 /* UIKit.framework */; };
 		F0B1DE141854829900908909 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F0B1DE121854829900908909 /* InfoPlist.strings */; };
 		F0B1DE161854829900908909 /* CameraPreviewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE151854829900908909 /* CameraPreviewTests.m */; };
-		F0B1DE21185482F200908909 /* NBNPhotoChooserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE20185482F200908909 /* NBNPhotoChooserViewController.m */; };
-		F0B1DE24185483E200908909 /* NBNCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE23185483E200908909 /* NBNCollectionViewCell.m */; };
-		F0B1DE271854854D00908909 /* NBNPhotoMiner.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE261854854D00908909 /* NBNPhotoMiner.m */; };
-		F0B1DE2A185490BF00908909 /* NBNAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE29185490BF00908909 /* NBNAssetCell.m */; };
-		F0B1DE2D18549BC500908909 /* NBNImageCaptureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0B1DE2C18549BC500908909 /* NBNImageCaptureCell.m */; };
-		F0C99B23185798CE00FD0D87 /* NBNImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0C99B22185798CE00FD0D87 /* NBNImageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +38,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F0495CA318589ED10032F2E5 /* NBNImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNImageViewController.h; sourceTree = "<group>"; };
+		F0495CA418589ED10032F2E5 /* NBNImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNImageViewController.m; sourceTree = "<group>"; };
+		F0495CA718589EDE0032F2E5 /* NBNAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBNAssetCell.h; path = Classes/NBNAssetCell.h; sourceTree = SOURCE_ROOT; };
+		F0495CA818589EDE0032F2E5 /* NBNAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBNAssetCell.m; path = Classes/NBNAssetCell.m; sourceTree = SOURCE_ROOT; };
+		F0495CA918589EDE0032F2E5 /* NBNCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBNCollectionViewCell.h; path = Classes/NBNCollectionViewCell.h; sourceTree = SOURCE_ROOT; };
+		F0495CAA18589EDE0032F2E5 /* NBNCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBNCollectionViewCell.m; path = Classes/NBNCollectionViewCell.m; sourceTree = SOURCE_ROOT; };
+		F0495CAB18589EDE0032F2E5 /* NBNImageCaptureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBNImageCaptureCell.h; path = Classes/NBNImageCaptureCell.h; sourceTree = SOURCE_ROOT; };
+		F0495CAC18589EDE0032F2E5 /* NBNImageCaptureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBNImageCaptureCell.m; path = Classes/NBNImageCaptureCell.m; sourceTree = SOURCE_ROOT; };
+		F0495CAD18589EDE0032F2E5 /* NBNPhotoChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBNPhotoChooserViewController.h; path = Classes/NBNPhotoChooserViewController.h; sourceTree = SOURCE_ROOT; };
+		F0495CAE18589EDE0032F2E5 /* NBNPhotoChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBNPhotoChooserViewController.m; path = Classes/NBNPhotoChooserViewController.m; sourceTree = SOURCE_ROOT; };
+		F0495CAF18589EDE0032F2E5 /* NBNPhotoMiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBNPhotoMiner.h; path = Classes/NBNPhotoMiner.h; sourceTree = SOURCE_ROOT; };
+		F0495CB018589EDE0032F2E5 /* NBNPhotoMiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NBNPhotoMiner.m; path = Classes/NBNPhotoMiner.m; sourceTree = SOURCE_ROOT; };
 		F0B1DDED1854829900908909 /* CameraPreview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraPreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0B1DDF01854829900908909 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F0B1DDF21854829900908909 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -54,18 +66,6 @@
 		F0B1DE111854829900908909 /* CameraPreviewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CameraPreviewTests-Info.plist"; sourceTree = "<group>"; };
 		F0B1DE131854829900908909 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F0B1DE151854829900908909 /* CameraPreviewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraPreviewTests.m; sourceTree = "<group>"; };
-		F0B1DE1F185482F200908909 /* NBNPhotoChooserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNPhotoChooserViewController.h; sourceTree = "<group>"; };
-		F0B1DE20185482F200908909 /* NBNPhotoChooserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNPhotoChooserViewController.m; sourceTree = "<group>"; };
-		F0B1DE22185483E200908909 /* NBNCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNCollectionViewCell.h; sourceTree = "<group>"; };
-		F0B1DE23185483E200908909 /* NBNCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNCollectionViewCell.m; sourceTree = "<group>"; };
-		F0B1DE251854854D00908909 /* NBNPhotoMiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNPhotoMiner.h; sourceTree = "<group>"; };
-		F0B1DE261854854D00908909 /* NBNPhotoMiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNPhotoMiner.m; sourceTree = "<group>"; };
-		F0B1DE28185490BF00908909 /* NBNAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNAssetCell.h; sourceTree = "<group>"; };
-		F0B1DE29185490BF00908909 /* NBNAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNAssetCell.m; sourceTree = "<group>"; };
-		F0B1DE2B18549BC500908909 /* NBNImageCaptureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNImageCaptureCell.h; sourceTree = "<group>"; };
-		F0B1DE2C18549BC500908909 /* NBNImageCaptureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNImageCaptureCell.m; sourceTree = "<group>"; };
-		F0C99B21185798CE00FD0D87 /* NBNImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNImageViewController.h; sourceTree = "<group>"; };
-		F0C99B22185798CE00FD0D87 /* NBNImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNImageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +92,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F0495CA618589ED30032F2E5 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				F0495CA718589EDE0032F2E5 /* NBNAssetCell.h */,
+				F0495CA818589EDE0032F2E5 /* NBNAssetCell.m */,
+				F0495CA918589EDE0032F2E5 /* NBNCollectionViewCell.h */,
+				F0495CAA18589EDE0032F2E5 /* NBNCollectionViewCell.m */,
+				F0495CAB18589EDE0032F2E5 /* NBNImageCaptureCell.h */,
+				F0495CAC18589EDE0032F2E5 /* NBNImageCaptureCell.m */,
+				F0495CAD18589EDE0032F2E5 /* NBNPhotoChooserViewController.h */,
+				F0495CAE18589EDE0032F2E5 /* NBNPhotoChooserViewController.m */,
+				F0495CAF18589EDE0032F2E5 /* NBNPhotoMiner.h */,
+				F0495CB018589EDE0032F2E5 /* NBNPhotoMiner.m */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
 		F0B1DDE41854829900908909 = {
 			isa = PBXGroup;
 			children = (
@@ -127,18 +144,9 @@
 			children = (
 				F0B1DDFF1854829900908909 /* NBNAppDelegate.h */,
 				F0B1DE001854829900908909 /* NBNAppDelegate.m */,
-				F0C99B21185798CE00FD0D87 /* NBNImageViewController.h */,
-				F0C99B22185798CE00FD0D87 /* NBNImageViewController.m */,
-				F0B1DE1F185482F200908909 /* NBNPhotoChooserViewController.h */,
-				F0B1DE20185482F200908909 /* NBNPhotoChooserViewController.m */,
-				F0B1DE2B18549BC500908909 /* NBNImageCaptureCell.h */,
-				F0B1DE2C18549BC500908909 /* NBNImageCaptureCell.m */,
-				F0B1DE28185490BF00908909 /* NBNAssetCell.h */,
-				F0B1DE29185490BF00908909 /* NBNAssetCell.m */,
-				F0B1DE22185483E200908909 /* NBNCollectionViewCell.h */,
-				F0B1DE23185483E200908909 /* NBNCollectionViewCell.m */,
-				F0B1DE251854854D00908909 /* NBNPhotoMiner.h */,
-				F0B1DE261854854D00908909 /* NBNPhotoMiner.m */,
+				F0495CA318589ED10032F2E5 /* NBNImageViewController.h */,
+				F0495CA418589ED10032F2E5 /* NBNImageViewController.m */,
+				F0495CA618589ED30032F2E5 /* Pod */,
 				F0B1DE021854829900908909 /* Images.xcassets */,
 				F0B1DDF71854829900908909 /* Supporting Files */,
 			);
@@ -273,14 +281,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0495CB218589EDE0032F2E5 /* NBNCollectionViewCell.m in Sources */,
+				F0495CB318589EDE0032F2E5 /* NBNImageCaptureCell.m in Sources */,
 				F0B1DDFD1854829900908909 /* main.m in Sources */,
-				F0B1DE21185482F200908909 /* NBNPhotoChooserViewController.m in Sources */,
-				F0B1DE271854854D00908909 /* NBNPhotoMiner.m in Sources */,
-				F0B1DE2D18549BC500908909 /* NBNImageCaptureCell.m in Sources */,
-				F0B1DE2A185490BF00908909 /* NBNAssetCell.m in Sources */,
 				F0B1DE011854829900908909 /* NBNAppDelegate.m in Sources */,
-				F0B1DE24185483E200908909 /* NBNCollectionViewCell.m in Sources */,
-				F0C99B23185798CE00FD0D87 /* NBNImageViewController.m in Sources */,
+				F0495CB418589EDE0032F2E5 /* NBNPhotoChooserViewController.m in Sources */,
+				F0495CB518589EDE0032F2E5 /* NBNPhotoMiner.m in Sources */,
+				F0495CA518589ED10032F2E5 /* NBNImageViewController.m in Sources */,
+				F0495CB118589EDE0032F2E5 /* NBNAssetCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
