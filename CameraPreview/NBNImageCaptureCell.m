@@ -29,12 +29,16 @@ static UIImagePickerController *imagePickerController;
     }
 }
 
-+ (CGSize)size {
-    return CGSizeMake(95, 95);
-}
+#pragma mark - Getter/Setter
 
 - (UIImagePickerController *)imagePickerController {
     return NBNImageCaptureCell.sharedImagePicker;
+}
+
+#pragma mark - Class Methods
+
++ (CGSize)size {
+    return CGSizeMake(95, 95);
 }
 
 + (UIImagePickerController *)sharedImagePicker {
