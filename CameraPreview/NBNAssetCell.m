@@ -32,8 +32,4 @@
     return CGSizeMake(95, 95);
 }
 
-- (void)dealloc {
-    NSLog(@"dealloc %@", self.class);
-}
-
 @end
