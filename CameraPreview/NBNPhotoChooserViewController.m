@@ -34,13 +34,13 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self getImages];
+    [self reloadDataSource];
 }
 
-- (void)getImages {
+- (void)reloadDataSource {
     NBNPhotoMiner *photoMiner = [[NBNPhotoMiner alloc] init];
     [photoMiner getAllPicturesCompletion:^(NSArray *images) {
-        self.images = images;
+        self.images = [[NSArray alloc] initWithArray:images];
         [self.collectionView reloadData];
         [self scrollToBottom:NO];
     }];
@@ -77,6 +77,14 @@
     [super didReceiveMemoryWarning];
 }
 
+- (BOOL)isCaptureCellInIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == self.images.count) {
+        return YES;
+    }
+
+    return NO;
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -91,10 +99,10 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (indexPath.row < self.images.count) {
-        return [self assetCellForCollectionView:collectionView atIndex:indexPath];
-    } else {
+    if ([self isCaptureCellInIndexPath:indexPath]) {
         return [self imageCaptureCellForCollectionView:collectionView atIndex:indexPath];
+    } else {
+        return [self assetCellForCollectionView:collectionView atIndex:indexPath];
     }
 }
 
@@ -136,10 +144,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < self.images.count) {
-        [self didChooseImage:self.images[indexPath.row]];
-    } else {
+    if ([self isCaptureCellInIndexPath:indexPath]) {
         [self didChooseImagePicker];
+    } else {
+        [self didChooseImage:self.images[indexPath.row]];
     }
 }
 
