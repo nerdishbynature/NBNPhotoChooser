@@ -14,6 +14,7 @@
     [super viewDidLoad];
 
     self.imageView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     [self.view addSubview:self.imageView];
 
 	UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoDark];
