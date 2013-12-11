@@ -43,11 +43,10 @@ NS_ENUM(NSInteger, NBNAssetsGroupType) {
                         [self.mutableArray addObject:image];
                     }
                 }
-                if (stop || secondStop) {
-                    self.imageArray = [NSArray arrayWithArray:self.mutableArray];
-                    block(self.imageArray);
-                }
             }];
+
+            self.imageArray = [NSArray arrayWithArray:self.mutableArray];
+            block(self.imageArray);
         }
 
     } failureBlock:^(NSError *error) {
