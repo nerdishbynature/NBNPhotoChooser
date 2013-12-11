@@ -55,4 +55,8 @@ NS_ENUM(NSInteger, NBNAssetsGroupType) {
     }];
 }
 
+- (void)dealloc {
+    NSLog(@"dealloc %@", self.class);
+}
+
 @end

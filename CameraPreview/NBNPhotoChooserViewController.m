@@ -8,7 +8,7 @@
 @property (nonatomic) UICollectionView *collectionView;
 @property (nonatomic) NSArray *images;
 @property (nonatomic) id<NBNPhotoChooserViewControllerDelegate> delegate;
-@property (nonatomic) NBNImageCaptureCell *captureCell;
+@property (nonatomic) BOOL inCapturingMode;
 
 @end
 
@@ -29,6 +29,10 @@
     [super viewDidLoad];
     [self setupCollectionView];
     [self registerCellTypes];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self getImages];
 }
 
@@ -37,6 +41,7 @@
     [photoMiner getAllPicturesCompletion:^(NSArray *images) {
         self.images = images;
         [self.collectionView reloadData];
+        [self scrollToBottom:NO];
     }];
 }
 
@@ -56,6 +61,10 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)dealloc {
+    NSLog(@"dealloc %@", self.class);
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -95,14 +104,19 @@
     NSString *CellIdentifier = [NBNImageCaptureCell reuserIdentifier];
     NBNImageCaptureCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
                                                                         forIndexPath:indexPath];
-    self.captureCell = cell;
+    cell.imagePickerController.delegate = self;
+    [cell isInCapturingMode:self.inCapturingMode frame:self.collectionView.frame];
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return [NBNAssetCell size];
+    if (self.inCapturingMode) {
+        return self.collectionView.frame.size;
+    } else {
+        return [NBNAssetCell size];
+    }
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -124,24 +138,50 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     }
 }
 
+#pragma mark - Image Preview choosing
+
 - (void)didChooseImagePicker {
-    self.captureCell.imagePickerController.delegate = self;
-    for (UIViewController *controller in self.captureCell.imagePickerController.viewControllers) {
-        @try {
-            [controller performSelector:@selector(_takePicture) withObject:nil];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"%@", exception);
-        }
-    }
+    [self prepareForFullScreen];
+    [self toggleCapturingMode];
 }
+
+- (void)prepareForFullScreen {
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
+
+- (void)prepareForImagePreviews {
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
+- (void)toggleCapturingMode {
+    self.inCapturingMode = !self.inCapturingMode;
+    [self.collectionView reloadData];
+    [self scrollToBottom:NO];
+    [self.collectionView setScrollEnabled:!self.collectionView.isScrollEnabled];
+}
+
+- (void)scrollToBottom:(BOOL)animated {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.images.count inSection:0];
+    [self.collectionView scrollToItemAtIndexPath:indexPath
+                                atScrollPosition:UICollectionViewScrollPositionBottom
+                                        animated:animated];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self didChooseImage:image];
+    [self prepareForImagePreviews];
+    [self toggleCapturingMode];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self prepareForImagePreviews];
+    [self toggleCapturingMode];
 }
 
 @end

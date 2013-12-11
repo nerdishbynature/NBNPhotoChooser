@@ -1,32 +1,35 @@
-//
-//  NBNImageViewController.m
-//  CameraPreview
-//
-//  Created by Piet Brauer on 10.12.13.
-//  Copyright (c) 2013 nerdish by nature. All rights reserved.
-//
-
 #import "NBNImageViewController.h"
+#import "NBNPhotoChooserViewController.h"
 
-@interface NBNImageViewController ()
+@interface NBNImageViewController () <NBNPhotoChooserViewControllerDelegate>
+
+@property (nonatomic) UIImageView *imageView;
 
 @end
 
 @implementation NBNImageViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
+    self.imageView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:self.imageView];
+
+	UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    button.frame = CGRectMake(self.view.frame.size.width / 2 - 100, self.view.frame.size.height - 200, 200, 100);
+    [button addTarget:self action:@selector(showImageChooser) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+}
+
+- (void)showImageChooser {
+    NBNPhotoChooserViewController *photoChooser = [[NBNPhotoChooserViewController alloc] initWithDelegate:self];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:photoChooser];
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+- (void)didChooseImage:(UIImage *)image {
+    self.imageView.image = image;
 }
 
 - (void)didReceiveMemoryWarning
