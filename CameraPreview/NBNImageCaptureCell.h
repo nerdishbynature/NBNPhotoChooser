@@ -2,7 +2,7 @@
 
 @interface NBNImageCaptureCell : NBNCollectionViewCell
 
-@property (nonatomic) UIImagePickerController *imagePickerController;
+@property (nonatomic, readonly) UIImagePickerController *imagePickerController;
 
 - (void)isInCapturingMode:(BOOL)inCapturingMode frame:(CGRect)frame;
 

@@ -1,6 +1,8 @@
 #import "NBNImageCaptureCell.h"
 #import <QuartzCore/QuartzCore.h>
 
+static UIImagePickerController *imagePickerController;
+
 @implementation NBNImageCaptureCell
 
 - (id)initWithFrame:(CGRect)frame
@@ -13,20 +15,17 @@
 }
 
 - (void)setupImagePicker {
-    _imagePickerController = [[UIImagePickerController alloc] init];
-    _imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    _imagePickerController.showsCameraControls = NO;
-
-    [self.contentView addSubview:_imagePickerController.view];
+    NBNImageCaptureCell.sharedImagePicker.showsCameraControls = NO;
+    [self.contentView addSubview:NBNImageCaptureCell.sharedImagePicker.view];
 }
 
 - (void)isInCapturingMode:(BOOL)inCapturingMode frame:(CGRect)frame {
     if (inCapturingMode) {
-        [_imagePickerController.view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-        _imagePickerController.showsCameraControls = YES;
+        NBNImageCaptureCell.sharedImagePicker.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+        NBNImageCaptureCell.sharedImagePicker.showsCameraControls = YES;
     } else {
-        [_imagePickerController.view setFrame:CGRectMake(0, 0, 95, 95)];
-        _imagePickerController.showsCameraControls = NO;
+        [NBNImageCaptureCell.sharedImagePicker.view setFrame:CGRectMake(0, 0, 95, 95)];
+        NBNImageCaptureCell.sharedImagePicker.showsCameraControls = NO;
     }
 }
 
@@ -34,8 +33,16 @@
     return CGSizeMake(95, 95);
 }
 
-- (void)dealloc {
-    NSLog(@"dealloc %@", self.class);
+- (UIImagePickerController *)imagePickerController {
+    return NBNImageCaptureCell.sharedImagePicker;
+}
+
++ (UIImagePickerController *)sharedImagePicker {
+    if (!imagePickerController) {
+        imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    return imagePickerController;
 }
 
 @end
