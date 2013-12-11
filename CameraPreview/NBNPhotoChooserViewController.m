@@ -157,6 +157,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     } else {
          NSAssert(NO, @"Delegate didChooseImage: has to be implemented");
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Image Preview choosing
@@ -192,12 +193,11 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [self dismissViewControllerAnimated:YES completion:nil];
-
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    [self didChooseImage:image];
+    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
     [self prepareForImagePreviews];
     [self toggleCapturingMode];
+    [self performSelector:@selector(reloadDataSource) withObject:nil afterDelay:1];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
