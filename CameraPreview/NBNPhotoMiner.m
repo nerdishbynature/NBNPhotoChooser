@@ -55,7 +55,9 @@ NSString *const NBNPhotoMinerKeyFullImageURL = @"NBNPhotoMinerKeyFullImageURL";
         }
 
     } failureBlock:^(NSError *error) {
-        NSLog(@"access not permitted");
+#ifdef DEBUG
+        NSLog(@"%@", error);
+#endif
     }];
 }
 
@@ -63,8 +65,7 @@ NSString *const NBNPhotoMinerKeyFullImageURL = @"NBNPhotoMinerKeyFullImageURL";
     NSURL *mediaURL = [dict objectForKey:NBNPhotoMinerKeyFullImageURL];
 
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset) {
-        ALAssetRepresentation *rep = [myasset defaultRepresentation];
-        CGImageRef iref = [rep fullScreenImage];
+        CGImageRef iref = myasset.defaultRepresentation.fullScreenImage;
         if (iref) {
             UIImage *largeimage = [UIImage imageWithCGImage:iref
                                                       scale:1.0
@@ -73,8 +74,10 @@ NSString *const NBNPhotoMinerKeyFullImageURL = @"NBNPhotoMinerKeyFullImageURL";
         }
     };
 
-    ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror) {
-        
+    ALAssetsLibraryAccessFailureBlock failureblock = ^(NSError *error) {
+#ifdef DEBUG
+        NSLog(@"%@", error);
+#endif
     };
 
     if(mediaURL) {
