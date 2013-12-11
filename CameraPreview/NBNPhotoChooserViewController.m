@@ -63,10 +63,6 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc {
-    NSLog(@"dealloc %@", self.class);
-}
-
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -101,11 +97,14 @@
 
 - (UICollectionViewCell *)imageCaptureCellForCollectionView:(UICollectionView *)collectionView
                                                     atIndex:(NSIndexPath *)indexPath {
+
     NSString *CellIdentifier = [NBNImageCaptureCell reuserIdentifier];
     NBNImageCaptureCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
-                                                                        forIndexPath:indexPath];
+                                                                               forIndexPath:indexPath];
+
     cell.imagePickerController.delegate = self;
     [cell isInCapturingMode:self.inCapturingMode frame:self.collectionView.frame];
+
     return cell;
 }
 
