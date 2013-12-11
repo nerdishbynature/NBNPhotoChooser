@@ -1,7 +1,7 @@
 #import "NBNAppDelegate.h"
-#import "NBNPhotoChooser.h"
+#import "NBNImageViewController.h"
 
-@interface NBNAppDelegate () <NBNPhotoChooserDelegate>
+@interface NBNAppDelegate ()
 
 @end
 
@@ -12,10 +12,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
 
-    self.photoChooser = [[NBNPhotoChooser alloc] init];
-    self.photoChooser.photoChooserDelegate = self;
-    self.window.rootViewController = self.photoChooser;
+    NBNImageViewController *imageViewController = [[NBNImageViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:imageViewController];
 
+    self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -33,12 +33,6 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-}
-
-#pragma mark - NBNPhotoChooserDelegate
-
-- (void)photoChooser:(NBNPhotoChooser *)photoChooser didChooseImage:(UIImage *)image {
-    NSLog(@"%@", image);
 }
 
 @end
