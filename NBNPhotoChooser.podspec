@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   s.name         = "NBNPhotoChooser"
   s.version      = "0.0.1"
   s.platform     = :ios
-  s.deployment_target = "7.0"
+  s.deployment_target = "6.0"
   s.summary      = "NBNPhotoChooser is an example implementation of the Tumblr Photo Chooser."
   s.homepage     = "https://github.com/nerdishbynature/#{s.name}"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
