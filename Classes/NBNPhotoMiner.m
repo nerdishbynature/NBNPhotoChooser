@@ -33,26 +33,22 @@ NSString *const NBNPhotoMinerKeyFullImageURL = @"NBNPhotoMinerKeyFullImageURL";
 - (void)getAllPicturesCompletion:(void (^)(NSArray *images))block {
     ALAssetsLibrary *al = [[ALAssetsLibrary alloc] init];
 
-    [al enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        ALAssetsGroupType type = (ALAssetsGroupType)[group valueForProperty:ALAssetsGroupPropertyType];
+    [al enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *secondStop) {
+            if (result) {
+                if ([[result valueForProperty:@"ALAssetPropertyType"] isEqualToString:@"ALAssetTypePhoto"]) {
 
-        if ((int)type == NBNAssetsGroupTypeCameraRoll) {
-            [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *secondStop) {
-                if (result) {
-                    if ([[result valueForProperty:@"ALAssetPropertyType"] isEqualToString:@"ALAssetTypePhoto"]) {
+                    UIImage *image = [UIImage imageWithCGImage:result.thumbnail
+                                                         scale:1.0
+                                                   orientation:0];
 
-                        UIImage *image = [UIImage imageWithCGImage:result.thumbnail
-                                                             scale:1.0
-                                                       orientation:0];
-
-                        [self.mutableArray addObject:@{NBNPhotoMinerKeyImage: image, NBNPhotoMinerKeyFullImageURL: [result valueForProperty:ALAssetPropertyAssetURL]}];
-                    }
+                    [self.mutableArray addObject:@{NBNPhotoMinerKeyImage: image, NBNPhotoMinerKeyFullImageURL: [result valueForProperty:ALAssetPropertyAssetURL]}];
                 }
-            }];
+            }
+        }];
 
-            self.imageArray = [NSArray arrayWithArray:self.mutableArray];
-            block(self.imageArray);
-        }
+        self.imageArray = [NSArray arrayWithArray:self.mutableArray];
+        block(self.imageArray);
 
     } failureBlock:^(NSError *error) {
 #ifdef DEBUG
