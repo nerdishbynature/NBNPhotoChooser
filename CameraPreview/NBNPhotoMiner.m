@@ -5,6 +5,9 @@ NS_ENUM(NSInteger, NBNAssetsGroupType) {
     NBNAssetsGroupTypeCameraRoll = 259
 };
 
+NSString *const NBNPhotoMinerKeyImage = @"NBNPhotoMinerKeyImage";
+NSString *const NBNPhotoMinerKeyFullImageURL = @"NBNPhotoMinerKeyFullImageURL";
+
 @interface NBNPhotoMiner ()
 
 @property (nonatomic) ALAssetsLibrary *library;
@@ -27,7 +30,7 @@ NS_ENUM(NSInteger, NBNAssetsGroupType) {
     return self;
 }
 
--(void)getAllPicturesCompletion:(void (^)(NSArray *images))block {
+- (void)getAllPicturesCompletion:(void (^)(NSArray *images))block {
     ALAssetsLibrary *al = [[ALAssetsLibrary alloc] init];
 
     [al enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -37,10 +40,12 @@ NS_ENUM(NSInteger, NBNAssetsGroupType) {
             [group enumerateAssetsUsingBlock:^(ALAsset *result, NSUInteger index, BOOL *secondStop) {
                 if (result) {
                     if ([[result valueForProperty:@"ALAssetPropertyType"] isEqualToString:@"ALAssetTypePhoto"]) {
+
                         UIImage *image = [UIImage imageWithCGImage:result.thumbnail
                                                              scale:1.0
                                                        orientation:0];
-                        [self.mutableArray addObject:image];
+
+                        [self.mutableArray addObject:@{NBNPhotoMinerKeyImage: image, NBNPhotoMinerKeyFullImageURL: [result valueForProperty:ALAssetPropertyAssetURL]}];
                     }
                 }
             }];
@@ -52,6 +57,32 @@ NS_ENUM(NSInteger, NBNAssetsGroupType) {
     } failureBlock:^(NSError *error) {
         NSLog(@"access not permitted");
     }];
+}
+
++ (void)imageFromDictionary:(NSDictionary *)dict block:(void (^)(UIImage *fullResolutionImage))block {
+    NSURL *mediaURL = [dict objectForKey:NBNPhotoMinerKeyFullImageURL];
+
+    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset) {
+        ALAssetRepresentation *rep = [myasset defaultRepresentation];
+        CGImageRef iref = [rep fullScreenImage];
+        if (iref) {
+            UIImage *largeimage = [UIImage imageWithCGImage:iref
+                                                      scale:1.0
+                                                orientation:0];
+            block(largeimage);
+        }
+    };
+
+    ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror) {
+        
+    };
+
+    if(mediaURL) {
+        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+        [assetslibrary assetForURL:mediaURL
+                       resultBlock:resultblock
+                      failureBlock:failureblock];
+    }
 }
 
 @end

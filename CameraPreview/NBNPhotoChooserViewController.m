@@ -111,7 +111,8 @@
     NSString *CellIdentifier = [NBNAssetCell reuserIdentifier];
     NBNAssetCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
                                                                    forIndexPath:indexPath];
-    UIImage *asset = [self.images objectAtIndex:indexPath.row];
+    NSDictionary *dict = [self.images objectAtIndex:indexPath.row];
+    UIImage *asset = dict[NBNPhotoMinerKeyImage];
     [cell configureWithAsset:asset];
 
     return cell;
@@ -151,14 +152,18 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     }
 }
 
-- (void)didChooseImage:(UIImage *)image {
+- (void)didChooseImage:(NSDictionary *)dictionary {
     if ([self.delegate respondsToSelector:@selector(didChooseImage:)]) {
-        [self.delegate didChooseImage:image];
+        [NBNPhotoMiner imageFromDictionary:dictionary block:^(UIImage *fullResolutionImage) {
+            [self.delegate didChooseImage:fullResolutionImage];
+        }];
     } else {
          NSAssert(NO, @"Delegate didChooseImage: has to be implemented");
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
 
 #pragma mark - Image Preview choosing
 
