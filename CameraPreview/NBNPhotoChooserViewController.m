@@ -28,6 +28,7 @@
 {
     [super viewDidLoad];
     [self setupCollectionView];
+    [self setupNavigationBar];
     [self registerCellTypes];
 }
 
@@ -54,9 +55,22 @@
     [self.view addSubview:self.collectionView];
 }
 
+- (void)setupNavigationBar {
+    self.title = @"Choose an Image";
+    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+                                                                        style:UIBarButtonItemStylePlain
+                                                                       target:self
+                                                                       action:@selector(cancel:)];
+    self.navigationItem.leftBarButtonItem = cancelBarButton;
+}
+
 - (void)registerCellTypes {
     [NBNAssetCell registerIn:self.collectionView];
     [NBNImageCaptureCell registerIn:self.collectionView];
+}
+
+- (void)cancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
