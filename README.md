@@ -4,13 +4,10 @@ NBNPhotoChooser
 An example implementation of the Tumblr Photo Chooser. 
 
 ### Installation using CocoaPods
-===
 
 `pod 'NBNPhotoChooser', '~> 0.0.1'`
 
-
 ### Usage
-===
 
 1. Allocate the NBNPhotoChooserViewController using `- (id)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate` 
 1. Allocate a UINavigationController
@@ -21,19 +18,19 @@ An example implementation of the Tumblr Photo Chooser.
 Example Usage:
 
 
-		#import <NBNPhotoChooser/NBNPhotoChooserViewController.h>
+	#import <NBNPhotoChooser/NBNPhotoChooserViewController.h>
 		
-		- (void) choosePhoto:(id)sender {
-		   NBNPhotoChooserViewController *photoChooserViewController = [[NBNPhotoChooserViewController alloc] initWithDelegate:self];
-		   UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:photoChooserViewController];
-		   [self presentViewController:navController animated:YES completion:nil];
-		}
+	- (void) choosePhoto:(id)sender {
+	    NBNPhotoChooserViewController *photoChooserViewController = [[NBNPhotoChooserViewController alloc] initWithDelegate:self];
+	    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:photoChooserViewController];
+	    [self presentViewController:navController animated:YES completion:nil];
+	}
 		
-		#pragma mark - NBNPhotoChooserViewControllerDelegate
+	#pragma mark - NBNPhotoChooserViewControllerDelegate
 		
-		- (void)didChooseImage:(UIImage *)image {
-		   self.commentToolbar.chosenImage = image;
-		}
+	- (void)didChooseImage:(UIImage *)image {
+	    self.commentToolbar.chosenImage = image;
+	}
     
 ### Contributing
 
