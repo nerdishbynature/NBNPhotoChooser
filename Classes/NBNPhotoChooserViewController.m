@@ -135,8 +135,10 @@
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.inCapturingMode) {
+        [self prepareForFullScreen];
         return self.collectionView.frame.size;
     } else {
+        [self prepareForImagePreviews];
         return [NBNAssetCell size];
     }
 }
