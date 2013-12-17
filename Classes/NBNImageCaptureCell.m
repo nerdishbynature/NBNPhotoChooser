@@ -45,6 +45,9 @@ static UIImagePickerController *imagePickerController;
     if (!imagePickerController) {
         imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
+        NSArray *cameraMediaTypesOnly = [mediaTypes filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(SELF CONTAINS %@)",@"image"]];
+        imagePickerController.mediaTypes = cameraMediaTypesOnly;
     }
     return imagePickerController;
 }
