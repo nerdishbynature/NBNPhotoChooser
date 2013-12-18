@@ -4,7 +4,9 @@
 
 @property (nonatomic, readonly) UIImagePickerController *imagePickerController;
 
-- (void)isInCapturingMode:(BOOL)inCapturingMode frame:(CGRect)frame;
+- (void)configureCell;
+
+- (void)removeSubviews;
 
 + (CGSize)size;
 

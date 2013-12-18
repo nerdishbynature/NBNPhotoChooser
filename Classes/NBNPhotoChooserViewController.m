@@ -8,7 +8,7 @@
 @property (nonatomic) UICollectionView *collectionView;
 @property (nonatomic) NSArray *images;
 @property (nonatomic) id<NBNPhotoChooserViewControllerDelegate> delegate;
-@property (nonatomic) BOOL inCapturingMode;
+@property (nonatomic) NBNImageCaptureCell *captureCell;
 
 @end
 
@@ -122,25 +122,17 @@
                                                     atIndex:(NSIndexPath *)indexPath {
 
     NSString *CellIdentifier = [NBNImageCaptureCell reuserIdentifier];
-    NBNImageCaptureCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
+    self.captureCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
                                                                                forIndexPath:indexPath];
 
-    cell.imagePickerController.delegate = self;
-    [cell isInCapturingMode:self.inCapturingMode frame:self.collectionView.frame];
-
-    return cell;
+    [self.captureCell configureCell];
+    return self.captureCell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.inCapturingMode) {
-        [self prepareForFullScreen];
-        return self.collectionView.frame.size;
-    } else {
-        [self prepareForImagePreviews];
-        return [NBNAssetCell size];
-    }
+    return [NBNAssetCell size];
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -165,13 +157,16 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-
 #pragma mark - Image Preview choosing
 
 - (void)didChooseImagePicker {
-    [self prepareForFullScreen];
-    [self toggleCapturingMode];
+    [self.captureCell removeSubviews];
+
+    UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+    controller.delegate = self;
+    controller.sourceType = UIImagePickerControllerSourceTypeCamera;
+    controller.showsCameraControls = YES;
+    [self.navigationController presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)prepareForFullScreen {
@@ -183,7 +178,6 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)toggleCapturingMode {
-    self.inCapturingMode = !self.inCapturingMode;
     [self.collectionView reloadData];
     [self scrollToBottom:NO];
     [self.collectionView setScrollEnabled:!self.collectionView.isScrollEnabled];
@@ -202,14 +196,16 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-    [self prepareForImagePreviews];
-    [self toggleCapturingMode];
-    [self performSelector:@selector(reloadDataSource) withObject:nil afterDelay:1];
+
+    [picker dismissViewControllerAnimated:NO completion:^{
+        [NBNPhotoMiner lastImageWithCompletion:^(NSDictionary *dict) {
+            [self didChooseImage:dict];
+        }];
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [self prepareForImagePreviews];
-    [self toggleCapturingMode];
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

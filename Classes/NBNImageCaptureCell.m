@@ -1,5 +1,4 @@
 #import "NBNImageCaptureCell.h"
-#import <QuartzCore/QuartzCore.h>
 
 static UIImagePickerController *imagePickerController;
 
@@ -15,17 +14,16 @@ static UIImagePickerController *imagePickerController;
 }
 
 - (void)setupImagePicker {
-    NBNImageCaptureCell.sharedImagePicker.showsCameraControls = NO;
     [self.contentView addSubview:NBNImageCaptureCell.sharedImagePicker.view];
 }
 
-- (void)isInCapturingMode:(BOOL)inCapturingMode frame:(CGRect)frame {
-    if (inCapturingMode) {
-        NBNImageCaptureCell.sharedImagePicker.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-        NBNImageCaptureCell.sharedImagePicker.showsCameraControls = YES;
-    } else {
-        [NBNImageCaptureCell.sharedImagePicker.view setFrame:CGRectMake(0, 0, 95, 95)];
-        NBNImageCaptureCell.sharedImagePicker.showsCameraControls = NO;
+- (void)configureCell {
+    NBNImageCaptureCell.sharedImagePicker.view.frame = CGRectMake(0, 0, 95, 95);
+}
+
+- (void)removeSubviews {
+    for (UIView *subview in self.contentView.subviews) {
+        [subview removeFromSuperview];
     }
 }
 
@@ -44,11 +42,9 @@ static UIImagePickerController *imagePickerController;
 + (UIImagePickerController *)sharedImagePicker {
     if (!imagePickerController) {
         imagePickerController = [[UIImagePickerController alloc] init];
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        NSArray *mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];
-        NSArray *cameraMediaTypesOnly = [mediaTypes filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(SELF CONTAINS %@)",@"image"]];
-        imagePickerController.mediaTypes = cameraMediaTypesOnly;
     }
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePickerController.showsCameraControls = NO;
     return imagePickerController;
 }
 
