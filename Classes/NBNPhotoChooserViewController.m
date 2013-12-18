@@ -195,17 +195,18 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 - (void)imagePickerController:(UIImagePickerController *)picker
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-
-    [picker dismissViewControllerAnimated:NO completion:^{
-        [NBNPhotoMiner lastImageWithCompletion:^(NSDictionary *dict) {
-            [self didChooseImage:dict];
-        }];
-    }];
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    [picker dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    [NBNPhotoMiner lastImageWithCompletion:^(NSDictionary *dict) {
+        [self didChooseImage:dict];
+    }];
 }
 
 @end
