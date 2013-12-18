@@ -84,4 +84,11 @@ NSString *const NBNPhotoMinerKeyFullImageURL = @"NBNPhotoMinerKeyFullImageURL";
     }
 }
 
++ (void)lastImageWithCompletion:(void (^)(NSDictionary *dict))block {
+    NBNPhotoMiner *photoMiner = [[NBNPhotoMiner alloc] init];
+    [photoMiner getAllPicturesCompletion:^(NSArray *images) {
+        block([images lastObject]);
+    }];
+}
+
 @end

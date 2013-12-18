@@ -9,4 +9,6 @@ FOUNDATION_EXPORT NSString *const NBNPhotoMinerKeyFullImageURL;
 
 + (void)imageFromDictionary:(NSDictionary *)dict block:(void (^)(UIImage *fullResolutionImage))block;
 
++ (void)lastImageWithCompletion:(void (^)(NSDictionary *dict))block;
+
 @end
