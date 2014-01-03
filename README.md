@@ -5,7 +5,7 @@ An example implementation of the Tumblr Photo Chooser.
 
 ### Installation using CocoaPods
 
-`pod 'NBNPhotoChooser', '~> 0.0.1'`
+`pod 'NBNPhotoChooser', '~> 0.0.2'`
 
 ### Usage
 
@@ -38,7 +38,5 @@ Contributions are highly appreciated, just open up an issue or a pull request.
 
 ### Known Issues
 
-
 * No iOS 6 support
 * Lack of landscape support
-* Last preview cell state is visible in the camera view (upper right corner) for a few moments
