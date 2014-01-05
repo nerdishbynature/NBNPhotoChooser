@@ -2,6 +2,7 @@
 #import "NBNAssetCell.h"
 #import "NBNPhotoMiner.h"
 #import "NBNImageCaptureCell.h"
+#import "NBNTransitioningDelegate.h"
 
 @interface NBNPhotoChooserViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -9,6 +10,7 @@
 @property (nonatomic) NSArray *images;
 @property (nonatomic) id<NBNPhotoChooserViewControllerDelegate> delegate;
 @property (nonatomic) NBNImageCaptureCell *captureCell;
+@property (nonatomic) NBNTransitioningDelegate *transitioningDelegate;
 
 @end
 
@@ -166,6 +168,11 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     controller.delegate = self;
     controller.sourceType = UIImagePickerControllerSourceTypeCamera;
     controller.showsCameraControls = YES;
+    if ([controller respondsToSelector:@selector(transitioningDelegate)]) {
+        self.transitioningDelegate = [[NBNTransitioningDelegate alloc] init];
+        controller.transitioningDelegate = self.transitioningDelegate;
+    }
+
     [self.navigationController presentViewController:controller animated:YES completion:nil];
 }
 
