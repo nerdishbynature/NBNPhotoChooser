@@ -5,7 +5,7 @@ An example implementation of the Tumblr Photo Chooser.
 
 ### Installation using CocoaPods
 
-`pod 'NBNPhotoChooser', '~> 0.0.2'`
+`pod 'NBNPhotoChooser', '~> 0.0.3'`
 
 ### Usage
 
