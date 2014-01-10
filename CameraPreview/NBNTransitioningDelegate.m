@@ -1,7 +1,9 @@
 #import "NBNTransitioningDelegate.h"
 
 @interface NBNTransitioningDelegate ()
-@property (nonatomic,assign) CGRect originFrame;
+
+@property (nonatomic, assign) CGRect originFrame;
+
 @end
 
 @implementation NBNTransitioningDelegate
@@ -34,9 +36,6 @@
     } else {
         [self dismissWithTransitionContext:transitionContext];
     }
-
-
-
 }
 
 #pragma mark - Private methods

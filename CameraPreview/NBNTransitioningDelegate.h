@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
 
-@interface NBNTransitioningDelegate : NSObject <UIViewControllerAnimatedTransitioning,UIViewControllerTransitioningDelegate>
+@interface NBNTransitioningDelegate : NSObject <UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate>
 
 @end
