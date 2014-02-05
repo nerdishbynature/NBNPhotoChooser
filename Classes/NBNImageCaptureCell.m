@@ -22,8 +22,13 @@ static UIImagePickerController *imagePickerController;
 }
 
 - (void)removeSubviews {
-    for (UIView *subview in self.contentView.subviews) {
-        [subview removeFromSuperview];
+    [NBNImageCaptureCell.sharedImagePicker.view removeFromSuperview];
+}
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    if (!NBNImageCaptureCell.sharedImagePicker.view.superview) {
+        [self setupImagePicker];
     }
 }
 
