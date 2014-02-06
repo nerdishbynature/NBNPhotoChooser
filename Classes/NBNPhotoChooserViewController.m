@@ -207,6 +207,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    picker.showsCameraControls = NO;
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
