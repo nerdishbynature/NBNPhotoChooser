@@ -11,6 +11,7 @@
 @property (nonatomic) id<NBNPhotoChooserViewControllerDelegate> delegate;
 @property (nonatomic) NBNImageCaptureCell *captureCell;
 @property (nonatomic) NBNTransitioningDelegate *transitioningDelegate;
+@property (nonatomic) UIImagePickerController *imagePickerController;
 
 @end
 
@@ -156,7 +157,9 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     } else {
          NSAssert(NO, @"Delegate didChooseImage: has to be implemented");
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.imagePickerController dismissViewControllerAnimated:NO completion:^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
 }
 
 #pragma mark - Image Preview choosing
@@ -164,16 +167,16 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 - (void)didChooseImagePicker {
     [self.captureCell removeSubviews];
 
-    UIImagePickerController *controller = [[UIImagePickerController alloc] init];
-    controller.delegate = self;
-    controller.sourceType = UIImagePickerControllerSourceTypeCamera;
-    controller.showsCameraControls = YES;
-    if ([controller respondsToSelector:@selector(transitioningDelegate)]) {
+    self.imagePickerController = [[UIImagePickerController alloc] init];
+    self.imagePickerController.delegate = self;
+    self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    self.imagePickerController.showsCameraControls = YES;
+    if ([self.imagePickerController respondsToSelector:@selector(transitioningDelegate)]) {
         self.transitioningDelegate = [[NBNTransitioningDelegate alloc] init];
-        controller.transitioningDelegate = self.transitioningDelegate;
+        self.imagePickerController.transitioningDelegate = self.transitioningDelegate;
     }
 
-    [self.navigationController presentViewController:controller animated:YES completion:nil];
+    [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
 }
 
 - (void)prepareForFullScreen {
@@ -203,7 +206,6 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    [picker dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
