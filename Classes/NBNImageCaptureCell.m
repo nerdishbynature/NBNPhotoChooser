@@ -31,7 +31,7 @@ static UIImagePickerController *imagePickerController;
 - (void)configureCell {
     CGSize cellSize = self.class.size;
     NBNImageCaptureCell.sharedImagePicker.view.frame = CGRectMake(0, 0, cellSize.width, cellSize.height);
-    self.maskImageView.image = [UIImage imageNamed:@"camera_cell"];
+    self.maskImageView.image = [UIImage imageNamed:@"NBNPhotoChooser.bundle/camera_cell"];
     self.maskImageView.frame = CGRectMake(0, 0, cellSize.width, cellSize.height);
 }
 
