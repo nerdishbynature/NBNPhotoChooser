@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		12494F76186AFA73002C1B15 /* NBNTransitioningDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 12494F75186AFA73002C1B15 /* NBNTransitioningDelegate.m */; };
+		12DE83C418A39EA000F888C8 /* camera_cell@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12DE83C218A39EA000F888C8 /* camera_cell@2x.png */; };
+		12DE83C518A39EA000F888C8 /* camera_cell.png in Resources */ = {isa = PBXBuildFile; fileRef = 12DE83C318A39EA000F888C8 /* camera_cell.png */; };
 		F0495CA518589ED10032F2E5 /* NBNImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F0495CA418589ED10032F2E5 /* NBNImageViewController.m */; };
 		F0495CB118589EDE0032F2E5 /* NBNAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0495CA818589EDE0032F2E5 /* NBNAssetCell.m */; };
 		F0495CB218589EDE0032F2E5 /* NBNCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F0495CAA18589EDE0032F2E5 /* NBNCollectionViewCell.m */; };
@@ -41,6 +43,8 @@
 /* Begin PBXFileReference section */
 		12494F74186AFA73002C1B15 /* NBNTransitioningDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNTransitioningDelegate.h; sourceTree = "<group>"; };
 		12494F75186AFA73002C1B15 /* NBNTransitioningDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNTransitioningDelegate.m; sourceTree = "<group>"; };
+		12DE83C218A39EA000F888C8 /* camera_cell@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_cell@2x.png"; sourceTree = "<group>"; };
+		12DE83C318A39EA000F888C8 /* camera_cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_cell.png; sourceTree = "<group>"; };
 		F0495CA318589ED10032F2E5 /* NBNImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNImageViewController.h; sourceTree = "<group>"; };
 		F0495CA418589ED10032F2E5 /* NBNImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNImageViewController.m; sourceTree = "<group>"; };
 		F0495CA718589EDE0032F2E5 /* NBNAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NBNAssetCell.h; path = Classes/NBNAssetCell.h; sourceTree = SOURCE_ROOT; };
@@ -95,6 +99,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		12DE83C118A39E7900F888C8 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				12DE83C218A39EA000F888C8 /* camera_cell@2x.png */,
+				12DE83C318A39EA000F888C8 /* camera_cell.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		F0495CA618589ED30032F2E5 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +165,7 @@
 				F0495CA318589ED10032F2E5 /* NBNImageViewController.h */,
 				F0495CA418589ED10032F2E5 /* NBNImageViewController.m */,
 				F0495CA618589ED30032F2E5 /* Pod */,
+				12DE83C118A39E7900F888C8 /* Assets */,
 				F0B1DE021854829900908909 /* Images.xcassets */,
 				F0B1DDF71854829900908909 /* Supporting Files */,
 			);
@@ -267,6 +281,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0B1DDFB1854829900908909 /* InfoPlist.strings in Resources */,
+				12DE83C418A39EA000F888C8 /* camera_cell@2x.png in Resources */,
+				12DE83C518A39EA000F888C8 /* camera_cell.png in Resources */,
 				F0B1DE031854829900908909 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

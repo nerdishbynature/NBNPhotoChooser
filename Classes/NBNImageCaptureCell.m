@@ -2,23 +2,37 @@
 
 static UIImagePickerController *imagePickerController;
 
+@interface NBNImageCaptureCell ()
+@property (nonatomic) UIImageView *maskImageView;
+@end
+
 @implementation NBNImageCaptureCell
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        [self setupMaskImageView];
         [self setupImagePicker];
     }
     return self;
 }
 
 - (void)setupImagePicker {
-    [self.contentView addSubview:NBNImageCaptureCell.sharedImagePicker.view];
+    [self.contentView insertSubview:NBNImageCaptureCell.sharedImagePicker.view
+                       belowSubview:self.maskImageView];
+}
+
+- (void)setupMaskImageView {
+    _maskImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [self.contentView addSubview:_maskImageView];
 }
 
 - (void)configureCell {
-    NBNImageCaptureCell.sharedImagePicker.view.frame = CGRectMake(0, 0, 95, 95);
+    CGSize cellSize = self.class.size;
+    NBNImageCaptureCell.sharedImagePicker.view.frame = CGRectMake(0, 0, cellSize.width, cellSize.height);
+    self.maskImageView.image = [UIImage imageNamed:@"camera_cell"];
+    self.maskImageView.frame = CGRectMake(0, 0, cellSize.width, cellSize.height);
 }
 
 - (void)removeSubviews {
