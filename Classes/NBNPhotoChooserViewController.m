@@ -157,9 +157,14 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     } else {
          NSAssert(NO, @"Delegate didChooseImage: has to be implemented");
     }
-    [self.imagePickerController dismissViewControllerAnimated:NO completion:^{
+    if ([self.imagePickerController presentingViewController]) {
+        [self.imagePickerController dismissViewControllerAnimated:NO completion:^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+    } else {
         [self dismissViewControllerAnimated:YES completion:nil];
-    }];
+    }
+
 }
 
 #pragma mark - Image Preview choosing
