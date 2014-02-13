@@ -73,6 +73,9 @@
 }
 
 - (void)cancel:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(photoChooserDidCancel:)]) {
+        [self.delegate photoChooserDidCancel:self];
+    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
