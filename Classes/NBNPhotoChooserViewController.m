@@ -84,11 +84,15 @@
 }
 
 - (BOOL)isCaptureCellInIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == self.images.count) {
+    if (indexPath.row == self.images.count && [self hasCamera]) {
         return YES;
     }
 
     return NO;
+}
+
+- (BOOL)hasCamera {
+    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -99,7 +103,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-    return self.images.count + 1;
+    return self.images.count + ([self hasCamera] ? 1 : 0);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
@@ -202,7 +206,11 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)scrollToBottom:(BOOL)animated {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:self.images.count inSection:0];
+    NSInteger count = [self collectionView:self.collectionView numberOfItemsInSection:0];
+    if (count == 0) {
+        return;
+    }
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:count-1 inSection:0];
     [self.collectionView scrollToItemAtIndexPath:indexPath
                                 atScrollPosition:UICollectionViewScrollPositionBottom
                                         animated:animated];
