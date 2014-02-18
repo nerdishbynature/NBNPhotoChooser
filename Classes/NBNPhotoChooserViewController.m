@@ -206,8 +206,14 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)scrollToBottom:(BOOL)animated {
-    CGPoint bottom = CGPointMake(0, self.collectionView.contentSize.height);
-    [self.collectionView setContentOffset:bottom animated:animated];
+    NSInteger count = [self collectionView:self.collectionView numberOfItemsInSection:0];
+    if (count == 0) {
+        return;
+    }
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:count-1 inSection:0];
+    [self.collectionView scrollToItemAtIndexPath:indexPath
+                                atScrollPosition:UICollectionViewScrollPositionBottom
+                                        animated:animated];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
