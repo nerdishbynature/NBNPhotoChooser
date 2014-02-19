@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "NBNPhotoChooser"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.platform     = :ios
   s.summary      = "NBNPhotoChooser is an example implementation of the Tumblr Photo Chooser."
   s.homepage     = "https://github.com/nerdishbynature/#{s.name}"
