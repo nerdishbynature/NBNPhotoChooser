@@ -61,10 +61,10 @@
 
 - (void)setupNavigationBar {
     self.cancelButton = [[UIBarButtonItem alloc] initWithTitle:self.cancelButtonTitle
-                                                         style:UIBarButtonItemStyle
+                                                         style:UIBarButtonItemStylePlain
                                                         target:self
                                                         action:@selector(cancel:)];
-    self.navigationItem.leftBarButtonItem = cancelBarButton;
+    self.navigationItem.leftBarButtonItem = self.cancelButton;
 }
 
 - (void)registerCellTypes {

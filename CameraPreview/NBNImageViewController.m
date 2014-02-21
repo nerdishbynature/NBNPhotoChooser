@@ -25,6 +25,8 @@
 
 - (void)showImageChooser {
     NBNPhotoChooserViewController *photoChooser = [[NBNPhotoChooserViewController alloc] initWithDelegate:self];
+    photoChooser.navigationBarTitle = @"Choose image";
+    photoChooser.cancelButtonTitle = @"Cancel";
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:photoChooser];
     [self presentViewController:navController animated:YES completion:nil];
 }
