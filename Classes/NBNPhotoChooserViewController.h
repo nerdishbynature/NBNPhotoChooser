@@ -6,6 +6,9 @@
 
 - (id)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate;
 
+@property (nonatomic) NSString *navigationBarTitle;
+@property (nonatomic) NSString *cancelButtonTitle;
+
 @end
 
 @protocol NBNPhotoChooserViewControllerDelegate <NSObject>

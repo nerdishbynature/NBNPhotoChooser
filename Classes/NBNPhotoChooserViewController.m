@@ -12,6 +12,7 @@
 @property (nonatomic) NBNImageCaptureCell *captureCell;
 @property (nonatomic) NBNTransitioningDelegate *transitioningDelegate;
 @property (nonatomic) UIImagePickerController *imagePickerController;
+@property (nonatomic) UIBarButtonItem *cancelButton;
 
 @end
 
@@ -59,10 +60,10 @@
 }
 
 - (void)setupNavigationBar {
-    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
-                                                                        style:UIBarButtonItemStylePlain
-                                                                       target:self
-                                                                       action:@selector(cancel:)];
+    self.cancelButton = [[UIBarButtonItem alloc] initWithTitle:self.cancelButtonTitle
+                                                         style:UIBarButtonItemStyle
+                                                        target:self
+                                                        action:@selector(cancel:)];
     self.navigationItem.leftBarButtonItem = cancelBarButton;
 }
 
@@ -213,6 +214,18 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.collectionView scrollToItemAtIndexPath:indexPath
                                 atScrollPosition:UICollectionViewScrollPositionBottom
                                         animated:animated];
+}
+
+#pragma mark - Setter
+
+- (void)setNavigationBarTitle:(NSString *)navigationBarTitle {
+    _navigationBarTitle = navigationBarTitle;
+    self.title = navigationBarTitle;
+}
+
+- (void)setCancelButtonTitle:(NSString *)cancelButtonTitle {
+    _cancelButtonTitle = cancelButtonTitle;
+    self.cancelButton.title = cancelButtonTitle;
 }
 
 #pragma mark - UIImagePickerControllerDelegate
