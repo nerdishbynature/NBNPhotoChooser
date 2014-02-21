@@ -59,7 +59,6 @@
 }
 
 - (void)setupNavigationBar {
-    self.title = @"Choose an Image";
     UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
                                                                         style:UIBarButtonItemStylePlain
                                                                        target:self
