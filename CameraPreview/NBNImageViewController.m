@@ -35,6 +35,9 @@
     self.imageView.image = image;
 }
 
+- (void)photoChooserDidCancel:(NBNPhotoChooserViewController *)photoChooser {
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
