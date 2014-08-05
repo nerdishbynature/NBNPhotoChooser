@@ -1,5 +1,5 @@
 #import "NBNImageViewController.h"
-#import "NBNPhotoChooserViewController.h"
+#import <NBNPhotoChooser/NBNPhotoChooserViewController.h>
 
 @interface NBNImageViewController () <NBNPhotoChooserViewControllerDelegate>
 
