@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Piet Brauer" => "piet@nerdishbynature.com" }
   s.source       = { :git => "https://github.com/nerdishbynature/NBNPhotoChooser.git", :tag => "#{s.version}" }
-  s.source_files = 'Classes', 'Classes/**/*.{h,m}'
-  s.resources    = 'NBNPhotoChooser.bundle'
+  s.source_files = 'Classes/**/*.{h,m}'
+  s.resource_bundle = { s.name => 'Assets/*' }
   s.requires_arc = true
 end
