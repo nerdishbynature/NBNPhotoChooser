@@ -8,7 +8,7 @@
 
 @property (nonatomic) UICollectionView *collectionView;
 @property (nonatomic) NSArray *images;
-@property (nonatomic) id<NBNPhotoChooserViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<NBNPhotoChooserViewControllerDelegate> delegate;
 @property (nonatomic) NBNImageCaptureCell *captureCell;
 @property (nonatomic) NBNTransitioningDelegate *transitioningDelegate;
 @property (nonatomic) UIImagePickerController *imagePickerController;
