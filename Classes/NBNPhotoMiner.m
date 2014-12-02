@@ -31,6 +31,7 @@ NSString *const NBNPhotoMinerKeyFullImageURL = @"NBNPhotoMinerKeyFullImageURL";
 }
 
 - (void)getAllPicturesCompletion:(void (^)(NSArray *images))block {
+    NSParameterAssert(block);
     ALAssetsLibrary *al = [[ALAssetsLibrary alloc] init];
 
     [al enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
@@ -58,6 +59,7 @@ NSString *const NBNPhotoMinerKeyFullImageURL = @"NBNPhotoMinerKeyFullImageURL";
 }
 
 + (void)imageFromDictionary:(NSDictionary *)dict block:(void (^)(UIImage *fullResolutionImage))block {
+    NSParameterAssert(block);
     NSURL *mediaURL = [dict objectForKey:NBNPhotoMinerKeyFullImageURL];
 
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset) {
@@ -85,6 +87,7 @@ NSString *const NBNPhotoMinerKeyFullImageURL = @"NBNPhotoMinerKeyFullImageURL";
 }
 
 + (void)lastImageWithCompletion:(void (^)(NSDictionary *dict))block {
+    NSParameterAssert(block);
     NBNPhotoMiner *photoMiner = [[NBNPhotoMiner alloc] init];
     [photoMiner getAllPicturesCompletion:^(NSArray *images) {
         block([images lastObject]);
