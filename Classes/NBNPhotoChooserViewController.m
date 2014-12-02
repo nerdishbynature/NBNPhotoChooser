@@ -157,9 +157,9 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)didChooseImage:(NSDictionary *)dictionary {
-    if ([self.delegate respondsToSelector:@selector(didChooseImage:)]) {
+    if ([self.delegate respondsToSelector:@selector(photoChooserController:didChooseImage:)]) {
         [NBNPhotoMiner imageFromDictionary:dictionary block:^(UIImage *fullResolutionImage) {
-            [self.delegate didChooseImage:fullResolutionImage];
+            [self.delegate photoChooserController:self didChooseImage:fullResolutionImage];
         }];
     } else {
          NSAssert(NO, @"Delegate didChooseImage: has to be implemented");
