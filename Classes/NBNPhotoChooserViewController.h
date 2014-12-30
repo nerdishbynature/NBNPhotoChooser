@@ -18,6 +18,8 @@
 @protocol NBNPhotoChooserViewControllerDelegate <NSObject>
 
 - (void)photoChooserController:(NBNPhotoChooserViewController *)photoChooser didChooseImage:(UIImage *)image;
+
+@optional
 - (void)photoChooserDidCancel:(NBNPhotoChooserViewController *)photoChooser;
 
 @end
