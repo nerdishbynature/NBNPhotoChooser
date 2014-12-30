@@ -109,10 +109,6 @@ static CGFloat const NBNDefaultCellSpacing = 12;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 - (BOOL)isCaptureCellInIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.images.count && [self hasCamera]) {
         return YES;
@@ -227,12 +223,6 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)prepareForImagePreviews {
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-}
-
-- (void)toggleCapturingMode {
-    [self.collectionView reloadData];
-    [self scrollToBottom:NO];
-    [self.collectionView setScrollEnabled:!self.collectionView.isScrollEnabled];
 }
 
 - (void)scrollToBottom:(BOOL)animated {
