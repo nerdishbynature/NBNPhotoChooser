@@ -32,6 +32,7 @@ static CGFloat const NBNDefaultCellSpacing = 12;
         _delegate = delegate;
         _maxCellWidth = maxCellWidth;
         _cellSpacing = cellSpacing;
+        _shouldAnimateImagePickerTransition = YES;
     }
 
     return self;
@@ -217,7 +218,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
         self.imagePickerController.transitioningDelegate = self.transitioningDelegate;
     }
 
-    [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
+    [self.navigationController presentViewController:self.imagePickerController animated:self.shouldAnimateImagePickerTransition completion:nil];
 }
 
 - (void)prepareForFullScreen {
@@ -267,7 +268,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     picker.showsCameraControls = NO;
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:self.shouldAnimateImagePickerTransition completion:^{
+        [self.collectionView reloadData];
+    }];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
