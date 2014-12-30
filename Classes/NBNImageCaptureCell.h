@@ -5,9 +5,6 @@
 @property (nonatomic, readonly) UIImagePickerController *imagePickerController;
 
 - (void)configureCell;
-
 - (void)removeSubviews;
-
-+ (CGSize)size;
 
 @end
