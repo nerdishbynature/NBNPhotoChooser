@@ -4,6 +4,9 @@
 #import "NBNImageCaptureCell.h"
 #import "NBNTransitioningDelegate.h"
 
+static CGFloat const NBNDefaultMaxCellWidth = 95;
+static CGFloat const NBNDefaultCellSpacing = 12;
+
 @interface NBNPhotoChooserViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic) UICollectionView *collectionView;
@@ -13,25 +16,35 @@
 @property (nonatomic) NBNTransitioningDelegate *transitioningDelegate;
 @property (nonatomic) UIImagePickerController *imagePickerController;
 @property (nonatomic) UIBarButtonItem *cancelButton;
+@property (nonatomic) CGSize cellSize;
+@property (nonatomic) CGFloat maxCellWidth;
+@property (nonatomic) CGFloat cellSpacing;
 
 @end
 
 @implementation NBNPhotoChooserViewController
 
-- (id)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate {
+- (instancetype)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate
+                     maxCellWidth:(CGFloat)maxCellWidth
+                     cellSpacing:(CGFloat)cellSpacing {
     self = [super init];
-
     if (self) {
         _delegate = delegate;
+        _maxCellWidth = maxCellWidth;
+        _cellSpacing = cellSpacing;
     }
 
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (instancetype)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate {
+    return [self initWithDelegate:delegate maxCellWidth:NBNDefaultMaxCellWidth cellSpacing:NBNDefaultCellSpacing];
+}
+
+- (void)viewDidLoad{
     [super viewDidLoad];
     [self setupCollectionView];
+    [self setupCellSize];
     [self setupNavigationBar];
     [self registerCellTypes];
 }
@@ -50,12 +63,28 @@
     }];
 }
 
+#pragma mark - Setup methods
+
+- (CGSize)setupCellSize {
+    CGFloat availableWidth = self.collectionView.frame.size.width - self.collectionView.contentInset.left - self.collectionView.contentInset.right;
+    CGFloat cellWidth = availableWidth;
+    NSInteger numCells = 1;
+    while (cellWidth > self.maxCellWidth) {
+        numCells++;
+        cellWidth = floorf((availableWidth - (numCells - 1) * self.cellSpacing) / numCells);
+    }
+    self.cellSize = CGSizeMake(cellWidth, cellWidth);
+}
+
 - (void)setupCollectionView {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.minimumLineSpacing = self.cellSpacing;
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame
                                              collectionViewLayout:flowLayout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.collectionView.contentInset = UIEdgeInsetsMake(self.cellSpacing, self.cellSpacing, self.cellSpacing, self.cellSpacing);
     [self.view addSubview:self.collectionView];
 }
 
@@ -142,7 +171,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return [NBNAssetCell size];
+    return self.cellSize;
 }
 
 #pragma mark - UICollectionViewDelegate

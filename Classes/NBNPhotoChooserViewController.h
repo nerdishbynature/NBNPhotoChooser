@@ -4,7 +4,10 @@
 
 @interface NBNPhotoChooserViewController : UIViewController
 
-- (id)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate
+                     maxCellWidth:(CGFloat)maxCellWidth
+                     cellSpacing:(CGFloat)cellSpacing;
 
 @property (nonatomic) NSString *navigationBarTitle;
 @property (nonatomic) NSString *cancelButtonTitle;
