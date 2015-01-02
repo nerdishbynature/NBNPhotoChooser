@@ -6,7 +6,7 @@
 
 - (instancetype)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate;
 - (instancetype)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate
-                     maxCellWidth:(CGFloat)maxCellWidth
+                    maxCellWidth:(CGFloat)maxCellWidth
                      cellSpacing:(CGFloat)cellSpacing;
 
 @property (nonatomic) NSString *navigationBarTitle;

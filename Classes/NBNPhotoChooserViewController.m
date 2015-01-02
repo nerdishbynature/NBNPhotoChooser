@@ -25,7 +25,7 @@ static CGFloat const NBNDefaultCellSpacing = 12;
 @implementation NBNPhotoChooserViewController
 
 - (instancetype)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate
-                     maxCellWidth:(CGFloat)maxCellWidth
+                    maxCellWidth:(CGFloat)maxCellWidth
                      cellSpacing:(CGFloat)cellSpacing {
     self = [super init];
     if (self) {

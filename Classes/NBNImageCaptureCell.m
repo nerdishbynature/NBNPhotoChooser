@@ -13,7 +13,7 @@ static UIImagePickerController *imagePickerController;
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.cellSize = frame.size;
+        _cellSize = frame.size;
         [self setupMaskImageView];
         [self setupImagePicker];
     }
