@@ -203,15 +203,14 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 #pragma mark - Image Preview choosing
 
 - (void)didChooseImagePicker {
-    [self.captureCell removeSubviews];
-
     self.imagePickerController = [[UIImagePickerController alloc] init];
     self.imagePickerController.delegate = self;
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
     self.imagePickerController.showsCameraControls = YES;
-    if ([self.imagePickerController respondsToSelector:@selector(transitioningDelegate)]) {
+    if (self.shouldAnimateImagePickerTransition && [self.imagePickerController respondsToSelector:@selector(transitioningDelegate)]) {
         self.transitioningDelegate = [[NBNTransitioningDelegate alloc] init];
         self.imagePickerController.transitioningDelegate = self.transitioningDelegate;
+        [self.captureCell removeSubviews];
     }
 
     [self.navigationController presentViewController:self.imagePickerController animated:self.shouldAnimateImagePickerTransition completion:nil];
@@ -257,10 +256,9 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self scrollToBottom:NO];
     picker.showsCameraControls = NO;
-    [picker dismissViewControllerAnimated:self.shouldAnimateImagePickerTransition completion:^{
-        [self.collectionView reloadData];
-    }];
+    [picker dismissViewControllerAnimated:self.shouldAnimateImagePickerTransition completion:nil];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
