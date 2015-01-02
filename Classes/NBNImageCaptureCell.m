@@ -16,6 +16,7 @@ static UIImagePickerController *imagePickerController;
         _cellSize = frame.size;
         [self setupMaskImageView];
         [self setupImagePicker];
+        self.clipsToBounds = YES;
     }
     return self;
 }
