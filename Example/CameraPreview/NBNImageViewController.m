@@ -31,7 +31,7 @@
     [self presentViewController:navController animated:YES completion:nil];
 }
 
-- (void)didChooseImage:(UIImage *)image {
+- (void)photoChooserController:(NBNPhotoChooserViewController *)photoChooser didChooseImage:(UIImage *)image {
     self.imageView.image = image;
 }
 

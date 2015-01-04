@@ -4,6 +4,7 @@ static UIImagePickerController *imagePickerController;
 
 @interface NBNImageCaptureCell ()
 @property (nonatomic) UIImageView *maskImageView;
+@property (nonatomic) CGSize cellSize;
 @end
 
 @implementation NBNImageCaptureCell
@@ -12,8 +13,10 @@ static UIImagePickerController *imagePickerController;
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _cellSize = frame.size;
         [self setupMaskImageView];
         [self setupImagePicker];
+        self.clipsToBounds = YES;
     }
     return self;
 }
@@ -29,10 +32,9 @@ static UIImagePickerController *imagePickerController;
 }
 
 - (void)configureCell {
-    CGSize cellSize = self.class.size;
-    NBNImageCaptureCell.sharedImagePicker.view.frame = CGRectMake(0, 0, cellSize.width, cellSize.height);
+    NBNImageCaptureCell.sharedImagePicker.view.frame = CGRectMake(0, 0, self.cellSize.width, self.cellSize.height);
     self.maskImageView.image = [UIImage imageNamed:@"NBNPhotoChooser.bundle/camera_cell"];
-    self.maskImageView.frame = CGRectMake(0, 0, cellSize.width, cellSize.height);
+    self.maskImageView.frame = CGRectMake(0, 0, self.cellSize.width, self.cellSize.height);
 }
 
 - (void)removeSubviews {
@@ -53,10 +55,6 @@ static UIImagePickerController *imagePickerController;
 }
 
 #pragma mark - Class Methods
-
-+ (CGSize)size {
-    return CGSizeMake(95, 95);
-}
 
 + (UIImagePickerController *)sharedImagePicker {
     if (!imagePickerController) {

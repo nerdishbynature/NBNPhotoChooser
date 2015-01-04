@@ -4,6 +4,9 @@
 #import "NBNImageCaptureCell.h"
 #import "NBNTransitioningDelegate.h"
 
+static CGFloat const NBNDefaultMaxCellWidth = 95;
+static CGFloat const NBNDefaultCellSpacing = 12;
+
 @interface NBNPhotoChooserViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic) UICollectionView *collectionView;
@@ -13,25 +16,36 @@
 @property (nonatomic) NBNTransitioningDelegate *transitioningDelegate;
 @property (nonatomic) UIImagePickerController *imagePickerController;
 @property (nonatomic) UIBarButtonItem *cancelButton;
+@property (nonatomic) CGSize cellSize;
+@property (nonatomic) CGFloat maxCellWidth;
+@property (nonatomic) CGFloat cellSpacing;
 
 @end
 
 @implementation NBNPhotoChooserViewController
 
-- (id)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate {
+- (instancetype)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate
+                    maxCellWidth:(CGFloat)maxCellWidth
+                     cellSpacing:(CGFloat)cellSpacing {
     self = [super init];
-
     if (self) {
         _delegate = delegate;
+        _maxCellWidth = maxCellWidth;
+        _cellSpacing = cellSpacing;
+        _shouldAnimateImagePickerTransition = YES;
     }
 
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (instancetype)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate {
+    return [self initWithDelegate:delegate maxCellWidth:NBNDefaultMaxCellWidth cellSpacing:NBNDefaultCellSpacing];
+}
+
+- (void)viewDidLoad{
     [super viewDidLoad];
     [self setupCollectionView];
+    [self setupCellSize];
     [self setupNavigationBar];
     [self registerCellTypes];
 }
@@ -50,12 +64,28 @@
     }];
 }
 
+#pragma mark - Setup methods
+
+- (CGSize)setupCellSize {
+    CGFloat availableWidth = self.collectionView.frame.size.width - self.collectionView.contentInset.left - self.collectionView.contentInset.right;
+    CGFloat cellWidth = availableWidth;
+    NSInteger numCells = 1;
+    while (cellWidth > self.maxCellWidth) {
+        numCells++;
+        cellWidth = floorf((availableWidth - (numCells - 1) * self.cellSpacing) / numCells);
+    }
+    self.cellSize = CGSizeMake(cellWidth, cellWidth);
+}
+
 - (void)setupCollectionView {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.minimumLineSpacing = self.cellSpacing;
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame
                                              collectionViewLayout:flowLayout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.collectionView.contentInset = UIEdgeInsetsMake(self.cellSpacing, self.cellSpacing, self.cellSpacing, self.cellSpacing);
     [self.view addSubview:self.collectionView];
 }
 
@@ -77,10 +107,6 @@
         [self.delegate photoChooserDidCancel:self];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 - (BOOL)isCaptureCellInIndexPath:(NSIndexPath *)indexPath {
@@ -142,7 +168,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return [NBNAssetCell size];
+    return self.cellSize;
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -157,9 +183,9 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)didChooseImage:(NSDictionary *)dictionary {
-    if ([self.delegate respondsToSelector:@selector(didChooseImage:)]) {
+    if ([self.delegate respondsToSelector:@selector(photoChooserController:didChooseImage:)]) {
         [NBNPhotoMiner imageFromDictionary:dictionary block:^(UIImage *fullResolutionImage) {
-            [self.delegate didChooseImage:fullResolutionImage];
+            [self.delegate photoChooserController:self didChooseImage:fullResolutionImage];
         }];
     } else {
          NSAssert(NO, @"Delegate didChooseImage: has to be implemented");
@@ -178,17 +204,16 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)didChooseImagePicker {
     [self.captureCell removeSubviews];
-
     self.imagePickerController = [[UIImagePickerController alloc] init];
     self.imagePickerController.delegate = self;
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
     self.imagePickerController.showsCameraControls = YES;
-    if ([self.imagePickerController respondsToSelector:@selector(transitioningDelegate)]) {
+    if (self.shouldAnimateImagePickerTransition && [self.imagePickerController respondsToSelector:@selector(transitioningDelegate)]) {
         self.transitioningDelegate = [[NBNTransitioningDelegate alloc] init];
         self.imagePickerController.transitioningDelegate = self.transitioningDelegate;
     }
 
-    [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
+    [self.navigationController presentViewController:self.imagePickerController animated:self.shouldAnimateImagePickerTransition completion:nil];
 }
 
 - (void)prepareForFullScreen {
@@ -197,12 +222,6 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)prepareForImagePreviews {
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-}
-
-- (void)toggleCapturingMode {
-    [self.collectionView reloadData];
-    [self scrollToBottom:NO];
-    [self.collectionView setScrollEnabled:!self.collectionView.isScrollEnabled];
 }
 
 - (void)scrollToBottom:(BOOL)animated {
@@ -238,7 +257,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     picker.showsCameraControls = NO;
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:self.shouldAnimateImagePickerTransition completion:nil];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {

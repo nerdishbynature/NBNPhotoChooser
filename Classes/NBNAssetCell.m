@@ -12,24 +12,15 @@
     self = [super initWithFrame:frame];
 
     if (self) {
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self.contentView addSubview:_imageView];
     }
 
     return self;
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.imageView.frame = CGRectMake(0, 0, NBNAssetCell.size.width, NBNAssetCell.size.height);
-}
-
 - (void)configureWithAsset:(UIImage *)image {
     self.imageView.image = image;
-}
-
-+ (CGSize)size {
-    return CGSizeMake(95, 95);
 }
 
 @end

@@ -4,16 +4,22 @@
 
 @interface NBNPhotoChooserViewController : UIViewController
 
-- (id)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<NBNPhotoChooserViewControllerDelegate>)delegate
+                    maxCellWidth:(CGFloat)maxCellWidth
+                     cellSpacing:(CGFloat)cellSpacing;
 
 @property (nonatomic) NSString *navigationBarTitle;
 @property (nonatomic) NSString *cancelButtonTitle;
+@property (nonatomic) BOOL shouldAnimateImagePickerTransition;
 
 @end
 
 @protocol NBNPhotoChooserViewControllerDelegate <NSObject>
 
-- (void)didChooseImage:(UIImage *)image;
+- (void)photoChooserController:(NBNPhotoChooserViewController *)photoChooser didChooseImage:(UIImage *)image;
+
+@optional
 - (void)photoChooserDidCancel:(NBNPhotoChooserViewController *)photoChooser;
 
 @end

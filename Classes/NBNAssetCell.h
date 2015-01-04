@@ -4,6 +4,4 @@
 
 - (void)configureWithAsset:(UIImage *)image;
 
-+ (CGSize)size;
-
 @end
