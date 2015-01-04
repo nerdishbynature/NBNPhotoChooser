@@ -33,7 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CE59872258B7473EA246BAC0 /* Pods-CameraPreview.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CameraPreview.xcconfig"; path = "Pods/Pods-CameraPreview.xcconfig"; sourceTree = "<group>"; };
+		9A4E3D3683A9102720A36E56 /* Pods-CameraPreview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CameraPreview.release.xcconfig"; path = "Pods/Target Support Files/Pods-CameraPreview/Pods-CameraPreview.release.xcconfig"; sourceTree = "<group>"; };
+		D5E0704CFC1581E92274FEF8 /* Pods-CameraPreview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CameraPreview.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CameraPreview/Pods-CameraPreview.debug.xcconfig"; sourceTree = "<group>"; };
 		F0495CA318589ED10032F2E5 /* NBNImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBNImageViewController.h; sourceTree = "<group>"; };
 		F0495CA418589ED10032F2E5 /* NBNImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBNImageViewController.m; sourceTree = "<group>"; };
 		F0B1DDED1854829900908909 /* CameraPreview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraPreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +80,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C21FF6A789D769044428113D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D5E0704CFC1581E92274FEF8 /* Pods-CameraPreview.debug.xcconfig */,
+				9A4E3D3683A9102720A36E56 /* Pods-CameraPreview.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F0B1DDE41854829900908909 = {
 			isa = PBXGroup;
 			children = (
@@ -86,7 +96,7 @@
 				F0B1DE0F1854829900908909 /* CameraPreviewTests */,
 				F0B1DDEF1854829900908909 /* Frameworks */,
 				F0B1DDEE1854829900908909 /* Products */,
-				CE59872258B7473EA246BAC0 /* Pods-CameraPreview.xcconfig */,
+				C21FF6A789D769044428113D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -261,7 +271,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-CameraPreview-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CameraPreview/Pods-CameraPreview-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		82119C284E334DD689DB73A7 /* Check Pods Manifest.lock */ = {
@@ -403,7 +413,7 @@
 		};
 		F0B1DE1A1854829900908909 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE59872258B7473EA246BAC0 /* Pods-CameraPreview.xcconfig */;
+			baseConfigurationReference = D5E0704CFC1581E92274FEF8 /* Pods-CameraPreview.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -414,13 +424,14 @@
 				INFOPLIST_FILE = "CameraPreview/CameraPreview-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		F0B1DE1B1854829900908909 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE59872258B7473EA246BAC0 /* Pods-CameraPreview.xcconfig */;
+			baseConfigurationReference = 9A4E3D3683A9102720A36E56 /* Pods-CameraPreview.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  NBNPhotoChooser: e3c2764a57adb28257337b81dddbd6e727bffd78
+  NBNPhotoChooser: c69aa065f8dcf9052e01fa7d4e6daa9ba5347903
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.35.0
