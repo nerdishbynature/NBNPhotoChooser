@@ -160,8 +160,8 @@ static CGFloat const NBNDefaultCellSpacing = 12;
     NSString *CellIdentifier = [NBNImageCaptureCell reuserIdentifier];
     self.captureCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
                                                                                forIndexPath:indexPath];
-
-    [self.captureCell configureCell];
+    [self.captureCell startCapture];
+    
     return self.captureCell;
 }
 
@@ -203,7 +203,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 #pragma mark - Image Preview choosing
 
 - (void)didChooseImagePicker {
-    [self.captureCell removeSubviews];
+    [self.captureCell stopCapture];
     self.imagePickerController = [[UIImagePickerController alloc] init];
     self.imagePickerController.delegate = self;
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;

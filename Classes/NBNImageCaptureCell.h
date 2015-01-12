@@ -2,9 +2,7 @@
 
 @interface NBNImageCaptureCell : NBNCollectionViewCell
 
-@property (nonatomic, readonly) UIImagePickerController *imagePickerController;
-
-- (void)configureCell;
-- (void)removeSubviews;
+- (void)startCapture;
+- (void)stopCapture;
 
 @end
