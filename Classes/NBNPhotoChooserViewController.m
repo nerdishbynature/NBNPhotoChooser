@@ -271,11 +271,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationPortrait;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    return toInterfaceOrientation == UIInterfaceOrientationPortrait;
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end
