@@ -9,8 +9,7 @@
 
 @implementation NBNImageViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 
     self.imageView = [[UIImageView alloc] initWithFrame:self.view.frame];
@@ -36,12 +35,7 @@
 }
 
 - (void)photoChooserDidCancel:(NBNPhotoChooserViewController *)photoChooser {
-}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

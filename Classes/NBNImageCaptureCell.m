@@ -2,14 +2,15 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface NBNImageCaptureCell ()
+
 @property (nonatomic) UIImageView *maskImageView;
 @property (nonatomic, weak) AVCaptureVideoPreviewLayer *previewCaptureLayer;
+
 @end
 
 @implementation NBNImageCaptureCell
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self setupImagePicker];
@@ -22,6 +23,7 @@
                                                      name:UIDeviceOrientationDidChangeNotification
                                                    object:nil];
     }
+
     return self;
 }
 
