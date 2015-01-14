@@ -28,7 +28,7 @@ Example Usage:
 
 #pragma mark - NBNPhotoChooserViewControllerDelegate
 
-- (void)didChooseImage:(UIImage *)image {
+- (void)photoChooserController:(NBNPhotoChooserViewController *)photoChooser didChooseImage:(UIImage *)image {
     self.commentToolbar.chosenImage = image;
 }
 ```
