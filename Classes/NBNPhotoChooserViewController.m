@@ -75,6 +75,8 @@ static CGFloat const NBNDefaultCellSpacing = 12;
         cellWidth = floorf((availableWidth - (numCells - 1) * self.cellSpacing) / numCells);
     }
     self.cellSize = CGSizeMake(cellWidth, cellWidth);
+    
+    return self.cellSize;
 }
 
 - (void)setupCollectionView {
@@ -161,7 +163,7 @@ static CGFloat const NBNDefaultCellSpacing = 12;
     self.captureCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
                                                                                forIndexPath:indexPath];
 
-    [self.captureCell configureCell];
+    [self.captureCell startCapture];
     return self.captureCell;
 }
 
@@ -203,7 +205,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 #pragma mark - Image Preview choosing
 
 - (void)didChooseImagePicker {
-    [self.captureCell removeSubviews];
+    [self.captureCell stopCapture];
     self.imagePickerController = [[UIImagePickerController alloc] init];
     self.imagePickerController.delegate = self;
     self.imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -272,10 +274,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
 - (NSUInteger)supportedInterfaceOrientations {
     return UIInterfaceOrientationPortrait;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    return toInterfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 @end

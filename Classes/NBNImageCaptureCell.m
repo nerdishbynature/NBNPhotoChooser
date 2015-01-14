@@ -1,68 +1,102 @@
 #import "NBNImageCaptureCell.h"
-
-static UIImagePickerController *imagePickerController;
+#import <AVFoundation/AVFoundation.h>
 
 @interface NBNImageCaptureCell ()
 @property (nonatomic) UIImageView *maskImageView;
-@property (nonatomic) CGSize cellSize;
+@property (nonatomic, weak) AVCaptureVideoPreviewLayer *previewCaptureLayer;
 @end
 
 @implementation NBNImageCaptureCell
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _cellSize = frame.size;
-        [self setupMaskImageView];
         [self setupImagePicker];
+        [self setupMaskImageView];
+        
         self.clipsToBounds = YES;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(didChangeDeviceOrientation:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:nil];
     }
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIDeviceOrientationDidChangeNotification
+                                                  object:nil];
+}
+
+#pragma mark - Setup SubViews
+
 - (void)setupImagePicker {
-    [self.contentView insertSubview:NBNImageCaptureCell.sharedImagePicker.view
-                       belowSubview:self.maskImageView];
+    if (!self.previewCaptureLayer) {
+        AVCaptureSession *captureSession = [[AVCaptureSession alloc] init];
+        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        NSError *error = nil;
+        AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+        [captureSession addInput:input];
+        
+        AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:captureSession];
+        captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        [self.contentView.layer addSublayer:captureVideoPreviewLayer];
+        self.previewCaptureLayer = captureVideoPreviewLayer;
+        
+        [self adjustCameraOrientation];
+        [self startCapture];
+    }
 }
 
 - (void)setupMaskImageView {
     _maskImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.maskImageView.image = [UIImage imageNamed:@"NBNPhotoChooser.bundle/camera_cell"];
     [self.contentView addSubview:_maskImageView];
 }
 
-- (void)configureCell {
-    NBNImageCaptureCell.sharedImagePicker.view.frame = CGRectMake(0, 0, self.cellSize.width, self.cellSize.height);
-    self.maskImageView.image = [UIImage imageNamed:@"NBNPhotoChooser.bundle/camera_cell"];
-    self.maskImageView.frame = CGRectMake(0, 0, self.cellSize.width, self.cellSize.height);
+#pragma mark - Layout
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.previewCaptureLayer.frame = self.bounds;
+    self.maskImageView.frame = self.bounds;
 }
 
-- (void)removeSubviews {
-    [NBNImageCaptureCell.sharedImagePicker.view removeFromSuperview];
-}
-
-- (void)prepareForReuse {
-    [super prepareForReuse];
-    if (!NBNImageCaptureCell.sharedImagePicker.view.superview) {
-        [self setupImagePicker];
+- (void)adjustCameraOrientation {
+    AVCaptureConnection *captureConnection = self.previewCaptureLayer.connection;
+    if ([captureConnection isVideoOrientationSupported]) {
+        AVCaptureVideoOrientation orientation = AVCaptureVideoOrientationPortrait;
+        if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortraitUpsideDown) {
+            orientation = AVCaptureVideoOrientationPortraitUpsideDown;
+        } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft) {
+            orientation = AVCaptureVideoOrientationLandscapeRight;
+        } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
+            orientation = AVCaptureVideoOrientationLandscapeLeft;
+        }
+        [captureConnection setVideoOrientation:orientation];
     }
 }
 
-#pragma mark - Getter/Setter
+#pragma mark - Notifications
 
-- (UIImagePickerController *)imagePickerController {
-    return NBNImageCaptureCell.sharedImagePicker;
+- (void)didChangeDeviceOrientation:(NSNotification *)notification {
+    [self adjustCameraOrientation];
 }
 
-#pragma mark - Class Methods
+#pragma mark - Control Capture
 
-+ (UIImagePickerController *)sharedImagePicker {
-    if (!imagePickerController) {
-        imagePickerController = [[UIImagePickerController alloc] init];
+- (void)startCapture {
+    if (!self.previewCaptureLayer.session.running) {
+        [self.previewCaptureLayer.session startRunning];
     }
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePickerController.showsCameraControls = NO;
-    return imagePickerController;
+}
+
+- (void)stopCapture {
+    [self.previewCaptureLayer.session stopRunning];
 }
 
 @end
