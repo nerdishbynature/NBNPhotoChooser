@@ -1,5 +1,5 @@
 PODS:
-  - NBNPhotoChooser (0.1.0)
+  - NBNPhotoChooser (0.2.0)
 
 DEPENDENCIES:
   - NBNPhotoChooser (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  NBNPhotoChooser: 23e3b50be67951c6a83443114af64149cd5a2411
+  NBNPhotoChooser: 8dcbe22bf440b5ab55334deb3bc9b4e01357daf7
 
 COCOAPODS: 0.35.0
