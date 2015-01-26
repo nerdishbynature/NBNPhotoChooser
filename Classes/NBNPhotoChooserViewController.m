@@ -3,6 +3,7 @@
 #import "NBNPhotoMiner.h"
 #import "NBNImageCaptureCell.h"
 #import "NBNTransitioningDelegate.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 static CGFloat const NBNDefaultMaxCellWidth = 95;
 static CGFloat const NBNDefaultCellSpacing = 12;
@@ -58,10 +59,19 @@ static CGFloat const NBNDefaultCellSpacing = 12;
 - (void)reloadDataSource {
     NBNPhotoMiner *photoMiner = [[NBNPhotoMiner alloc] init];
     [photoMiner getAllPicturesCompletion:^(NSArray *images) {
-        self.images = [[NSArray alloc] initWithArray:images];
+        if ([images count] > 0) {
+            self.images = [[NSArray alloc] initWithArray:images];
+        } else if (![self canAccessPhotoLibraryAndCamera]){
+            // We have no access - so close the photo chooser
+            [self cancel:nil];
+        }
         [self.collectionView reloadData];
         [self scrollToBottom:NO];
     }];
+}
+
+- (BOOL)canAccessPhotoLibraryAndCamera {
+    return [ALAssetsLibrary authorizationStatus] == ALAuthorizationStatusAuthorized;
 }
 
 #pragma mark - Setup methods
@@ -120,6 +130,9 @@ static CGFloat const NBNDefaultCellSpacing = 12;
 }
 
 - (BOOL)hasCamera {
+    if (![self canAccessPhotoLibraryAndCamera]) {
+        return NO;
+    }
     return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
 }
 

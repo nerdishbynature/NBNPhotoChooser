@@ -55,6 +55,9 @@ NSString *const NBNPhotoMinerKeyFullImageURL = @"NBNPhotoMinerKeyFullImageURL";
 #ifdef DEBUG
         NSLog(@"%@", error);
 #endif
+        if (block) {
+            block(nil);
+        }
     }];
 }
 
