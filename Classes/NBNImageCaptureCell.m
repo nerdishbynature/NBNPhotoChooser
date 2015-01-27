@@ -41,15 +41,16 @@
         AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
         NSError *error = nil;
         AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
-        [captureSession addInput:input];
-        
-        AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:captureSession];
-        captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        [self.contentView.layer addSublayer:captureVideoPreviewLayer];
-        self.previewCaptureLayer = captureVideoPreviewLayer;
-        
-        [self adjustCameraOrientation];
-        [self startCapture];
+        if ([captureSession canAddInput:input]) {
+            [captureSession addInput:input];
+            AVCaptureVideoPreviewLayer *captureVideoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:captureSession];
+            captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+            [self.contentView.layer addSublayer:captureVideoPreviewLayer];
+            self.previewCaptureLayer = captureVideoPreviewLayer;
+            
+            [self adjustCameraOrientation];
+            [self startCapture];
+        }
     }
 }
 

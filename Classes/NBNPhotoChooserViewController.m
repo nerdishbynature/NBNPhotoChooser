@@ -4,6 +4,7 @@
 #import "NBNImageCaptureCell.h"
 #import "NBNTransitioningDelegate.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVFoundation.h>
 
 static CGFloat const NBNDefaultMaxCellWidth = 95;
 static CGFloat const NBNDefaultCellSpacing = 12;
@@ -20,6 +21,8 @@ static CGFloat const NBNDefaultCellSpacing = 12;
 @property (nonatomic) CGSize cellSize;
 @property (nonatomic) CGFloat maxCellWidth;
 @property (nonatomic) CGFloat cellSpacing;
+@property (nonatomic) BOOL hasCamera;
+@property (nonatomic) BOOL cameraAvailabilityDetermined;
 
 @end
 
@@ -130,10 +133,25 @@ static CGFloat const NBNDefaultCellSpacing = 12;
 }
 
 - (BOOL)hasCamera {
-    if (![self canAccessPhotoLibraryAndCamera]) {
-        return NO;
+    if (self.cameraAvailabilityDetermined) {
+        return _hasCamera;
     }
-    return [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+    
+    if (![self canAccessPhotoLibraryAndCamera]) {
+        _hasCamera = NO;
+    } else {
+        _hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+        if (_hasCamera) {
+            // Double check we really can use the camera now
+            AVCaptureSession *captureSession = [[AVCaptureSession alloc] init];
+            AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+            AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+            _hasCamera = [captureSession canAddInput:input];
+        }
+    }
+    self.cameraAvailabilityDetermined = YES;
+    
+    return _hasCamera;
 }
 
 #pragma mark - UICollectionViewDataSource
