@@ -147,9 +147,9 @@ static CGFloat const NBNDefaultCellSpacing = 12;
             AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
             AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
             _hasCamera = [captureSession canAddInput:input];
+            self.cameraAvailabilityDetermined = YES;
         }
     }
-    self.cameraAvailabilityDetermined = YES;
     
     return _hasCamera;
 }
