@@ -189,9 +189,8 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
         [NBNPhotoMiner imageFromDictionary:dictionary block:^(UIImage *fullResolutionImage) {
             [self.delegate photoChooserController:self didChooseImage:fullResolutionImage];
         }];
-    } else {
-         NSAssert(NO, @"Delegate didChooseImage: has to be implemented");
     }
+
     if ([self.imagePickerController presentingViewController]) {
         [self.imagePickerController dismissViewControllerAnimated:NO completion:^{
             [self dismissViewControllerAnimated:YES completion:nil];
