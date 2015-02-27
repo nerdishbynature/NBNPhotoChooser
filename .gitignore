@@ -20,8 +20,7 @@ DerivedData
 *.ipa
 
 # AppCode
-.idea/workspace.xml
-.idea/tasks.xml
+.idea/
 
 # CocoaPods
 Pods
