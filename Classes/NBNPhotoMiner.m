@@ -42,8 +42,11 @@ NSString *const NBNPhotoMinerKeyFullImageURL = @"NBNPhotoMinerKeyFullImageURL";
                     UIImage *image = [UIImage imageWithCGImage:result.thumbnail
                                                          scale:1.0
                                                    orientation:0];
+                    NSURL *URL = [result valueForProperty:ALAssetPropertyAssetURL];
 
-                    [self.mutableArray addObject:@{NBNPhotoMinerKeyImage: image, NBNPhotoMinerKeyFullImageURL: [result valueForProperty:ALAssetPropertyAssetURL]}];
+                    if (image && URL) {
+                        [self.mutableArray addObject:@{NBNPhotoMinerKeyImage: image, NBNPhotoMinerKeyFullImageURL: URL}];
+                    }
                 }
             }
         }];

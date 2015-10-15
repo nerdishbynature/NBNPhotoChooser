@@ -271,7 +271,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
 }
 

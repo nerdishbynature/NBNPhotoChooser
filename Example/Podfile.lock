@@ -6,9 +6,9 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   NBNPhotoChooser:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  NBNPhotoChooser: cbda5c6742329752abbd5b378290c4a7fead8e45
+  NBNPhotoChooser: 5159ec24b5cc41324b63a3bdd0bef6bd7aa6d824
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.39.0
