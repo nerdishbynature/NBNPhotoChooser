@@ -33,7 +33,6 @@ static CGFloat const NBNDefaultCellSpacing = 12;
         _maxCellWidth = maxCellWidth;
         _cellSpacing = cellSpacing;
         _shouldAnimateImagePickerTransition = YES;
-        _shouldDismissAfterChoosingImage = NO;
     }
 
     return self;
