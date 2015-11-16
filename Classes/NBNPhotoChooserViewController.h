@@ -12,6 +12,7 @@
 @property (nonatomic) NSString *navigationBarTitle;
 @property (nonatomic) NSString *cancelButtonTitle;
 @property (nonatomic) BOOL shouldAnimateImagePickerTransition;
+@property (nonatomic) BOOL shouldDismissAfterChoosingImage;
 
 @end
 

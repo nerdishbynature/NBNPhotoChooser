@@ -33,6 +33,7 @@ static CGFloat const NBNDefaultCellSpacing = 12;
         _maxCellWidth = maxCellWidth;
         _cellSpacing = cellSpacing;
         _shouldAnimateImagePickerTransition = YES;
+        _shouldDismissAfterChoosingImage = NO;
     }
 
     return self;
@@ -191,6 +192,10 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
         }];
     }
 
+    if (self.shouldDismissAfterChoosingImage) {
+        return;
+    }
+
     if ([self.imagePickerController presentingViewController]) {
         [self.imagePickerController dismissViewControllerAnimated:NO completion:^{
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -198,7 +203,6 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-
 }
 
 #pragma mark - Image Preview choosing
