@@ -192,7 +192,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
         }];
     }
 
-    if (self.shouldDismissAfterChoosingImage) {
+    if (!self.shouldDismissAfterChoosingImage) {
         return;
     }
 
