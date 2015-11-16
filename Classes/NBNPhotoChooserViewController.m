@@ -191,6 +191,10 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
         }];
     }
 
+    if (!self.shouldDismissAfterChoosingImage) {
+        return;
+    }
+
     if ([self.imagePickerController presentingViewController]) {
         [self.imagePickerController dismissViewControllerAnimated:NO completion:^{
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -198,7 +202,6 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
-
 }
 
 #pragma mark - Image Preview choosing
