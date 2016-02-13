@@ -1,6 +1,6 @@
 # NBNPhotoChooser
 
-[![Cocoapods Version](http://img.shields.io/cocoapods/v/NBNPhotoChooser.svg?style=flat)](https://github.com/nerdishbynature/NBNPhotoChooser/blob/master/NBNPhotoChooser.podspec)
+[![CocoaPods Version](http://img.shields.io/cocoapods/v/NBNPhotoChooser.svg?style=flat)](https://github.com/nerdishbynature/NBNPhotoChooser/blob/master/NBNPhotoChooser.podspec)
 [![](http://img.shields.io/cocoapods/l/NBNPhotoChooser.svg?style=flat)](https://github.com/xing/NBNPhotoChooser/blob/master/LICENSE)
 [![CocoaPods Platform](http://img.shields.io/cocoapods/p/NBNPhotoChooser.svg?style=flat)]()
 
